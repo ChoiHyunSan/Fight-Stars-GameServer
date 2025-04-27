@@ -5,6 +5,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Google.Protobuf;
+using Google.Protobuf.Protocol;
 using Server.Web;
 using ServerCore;
 
@@ -13,17 +15,15 @@ namespace Server
 	class Program
 	{
 		static Listener _listener = new Listener();
-		public static GameRoom Room = new GameRoom();
 
 		static void FlushRoom()
 		{
-			Room.Push(() => Room.Flush());
 			JobTimer.Instance.Push(FlushRoom, 250);
 		}
 
 		static void Main(string[] args)
 		{
-			MatchingServer.Start(args);
+            MatchingServer.Start(args);
 
             // DNS (Domain Name System)
             string host = Dns.GetHostName();

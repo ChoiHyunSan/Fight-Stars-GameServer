@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using Server.Web;
 
 namespace Server.Contents.Room
 {
@@ -9,20 +9,42 @@ namespace Server.Contents.Room
 
         public static object _lock = new object();
 
-        public static Room createRoom(string mode, List<long> userIds)
+        public static Room? CreateRoom(string mode, List<UserGameInfo> userInfos)
         {
             lock (_lock)
             {
                 var roomId = Guid.NewGuid().ToString("N").Substring(0, 8); // 예: "4fd1c3b2"
                 Console.WriteLine($"Room Create! Room Id : {roomId}");
-                var room = new Room
+                Console.WriteLine($"User Count : {userInfos.Count}");
+                foreach(UserGameInfo info in userInfos)
                 {
-                    RoomId = roomId,
-                    Mode = mode,
-                    UserIds = userIds
-                };
+                    Console.WriteLine($"UserId : {info.UserId}, CharacterId : {info.CharacterId}, Skin ID : {info.SkinId}");
+                }
+
+                // TODO : 방 생성 로직 추가
+                var room = CreateRoomByMode(mode, userInfos);
+                if(room == null)
+                {
+                    Console.WriteLine("Room Creation Failed");
+                    return null;
+                }
+
                 Rooms[roomId] = room;
                 return room;
+            }
+        }
+
+        private static Room? CreateRoomByMode(string mode, List<UserGameInfo> userInfos)
+        {
+            switch (mode)
+            {
+                case "deathmatch":
+                    return new DeathMatch()
+                    {
+                        UserInfos = userInfos
+                    };
+                default:
+                    return null;
             }
         }
     }

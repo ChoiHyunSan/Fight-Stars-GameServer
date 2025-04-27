@@ -16,13 +16,19 @@ namespace Server.Web
 
             app.MapPost("/create-room", async (RoomCreateRequest request) =>
             {
-                if (string.IsNullOrEmpty(request.Mode) || request.UserIds.Count <= 0)
+                if (string.IsNullOrEmpty(request.Mode) || request.UserInfos.Count <= 0)
                 {
                     Console.WriteLine("Invalid Request");
                     return Results.BadRequest(new { error = "Invalid parameters", errorCode = 4001 });
                 }
 
-                var room = RoomManager.createRoom(request.Mode, request.UserIds);
+                var room = RoomManager.CreateRoom(request.Mode, request.UserInfos);
+                if(room == null)
+                {
+                    Console.WriteLine("Room Creation Failed");
+                    return Results.BadRequest(new { error = "Room creation failed", errorCode = 4002 });
+                }
+
                 var response = new RoomCreateResponse
                 {
                     RoomId = room.RoomId,
@@ -35,7 +41,7 @@ namespace Server.Web
                 return Results.Ok(response);
             });
 
-            app.Run("http://0.0.0.0:5005"); // 5000 포트로 HTTP 서버 오픈
+            Task.Run(() => app.Run("http://0.0.0.0:5005")); // 5000 포트로 HTTP 서버 오픈
         }
     }
 }
