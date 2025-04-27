@@ -8,7 +8,8 @@ namespace Server.Contents.Room
     {
         public string RoomId { get; set; }
         public string Mode { get; set; }
-        public int MaxPlayers { get; set; }
-        public string MapId { get; set; }
+        
+        public string Password { get; set; }
+        public List<long> UserIds { get; set; } = new List<long>();
     }
 }
