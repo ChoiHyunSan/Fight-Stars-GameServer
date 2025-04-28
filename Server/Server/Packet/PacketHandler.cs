@@ -3,14 +3,15 @@ using Google.Protobuf.Protocol;
 using Server;
 using ServerCore;
 
-
 class PacketHandler
 {
-	public static void C_ChatHandler(PacketSession session, IMessage packet)
-	{
-		C_Chat chatPacket = packet as C_Chat;
-		ClientSession clientSession = session as ClientSession;
-		
+    internal static void C_EnterRoomHandler(PacketSession session, IMessage message)
+    {
+        throw new NotImplementedException();
+    }
 
-	}
+    internal static void C_ReadyCompleteGameHandler(PacketSession session, IMessage message)
+    {
+        throw new NotImplementedException();
+    }
 }
