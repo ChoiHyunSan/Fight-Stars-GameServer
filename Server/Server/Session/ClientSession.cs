@@ -32,17 +32,11 @@ namespace Server
 		public override void OnConnected(EndPoint endPoint)
 		{
 			Console.WriteLine($"OnConnected : {endPoint}");
-
-			S_Chat chat = new S_Chat()
-			{
-				Context = "Hello from server!"
-			};
-			Send(chat);
         }
 
 		public override void OnRecvPacket(ArraySegment<byte> buffer)
 		{
-			// PacketManager.Instance.OnRecvPacket(this, buffer);
+			PacketManager.Instance.OnRecvPacket(this, buffer);
 		}
 
 		public override void OnDisconnected(EndPoint endPoint)

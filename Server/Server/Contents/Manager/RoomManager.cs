@@ -34,6 +34,18 @@ namespace Server.Contents.Room
             }
         }
 
+        public static void RemoveRoom(string roomId)
+        {
+            lock (_lock)
+            {
+                if (Rooms.ContainsKey(roomId))
+                {
+                    Rooms.Remove(roomId);
+                    Console.WriteLine($"Room Removed! Room Id : {roomId}");
+                }
+            }
+        }
+
         private static Room? CreateRoomByMode(string mode, List<UserGameInfo> userInfos)
         {
             switch (mode)
