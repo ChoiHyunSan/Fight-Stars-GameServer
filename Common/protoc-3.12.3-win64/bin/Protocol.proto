@@ -14,7 +14,8 @@ enum MsgId {
 message C_EnterRoom {
   string roomId = 1;
   string password = 2;
-  int32 userId = 3;
+  string nickname = 3;
+  int32 userId = 4;
 }
 
 message S_EnterRoom {
@@ -35,7 +36,9 @@ message S_EnterRoom {
   message PlayerInfo {
     int32 userId = 1;
     int32 skinId = 2;
-    SpawnPos spawnPos = 3;
+    int32 characterId = 3;
+    string nickname = 4;
+    SpawnPos spawnPos = 5;
   }
 }
 

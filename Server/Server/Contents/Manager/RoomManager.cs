@@ -21,13 +21,16 @@ namespace Server.Contents.Room
                     Console.WriteLine($"UserId : {info.UserId}, CharacterId : {info.CharacterId}, Skin ID : {info.SkinId}");
                 }
 
+                var password = "password";  // TODO : 비밀번호 생성 로직 추가
+
                 // TODO : 방 생성 로직 추가
-                var room = CreateRoomByMode(mode, userInfos);
+                var room = CreateRoomByMode(mode);
                 if(room == null)
                 {
                     Console.WriteLine("Room Creation Failed");
                     return null;
                 }
+                room.SetData(roomId, password, userInfos);
 
                 Rooms[roomId] = room;
                 return room;
@@ -46,18 +49,30 @@ namespace Server.Contents.Room
             }
         }
 
-        private static Room? CreateRoomByMode(string mode, List<UserGameInfo> userInfos)
+        public static Room? GetRoom(string roomId)
         {
+            lock (_lock)
+            {
+                if (Rooms.ContainsKey(roomId))
+                {
+                    return Rooms[roomId];
+                }
+                return null;
+            }
+        }
+
+        private static Room? CreateRoomByMode(string mode)
+        {
+            Room room = null;
             switch (mode)
             {
                 case "deathmatch":
-                    return new DeathMatch()
-                    {
-                        UserInfos = userInfos
-                    };
+                    room = new DeathMatch();
+                    break;
                 default:
-                    return null;
+                    break;
             }
+            return room;
         }
     }
 }

@@ -11,11 +11,13 @@ using Google.Protobuf;
 
 namespace Server
 {
-	class ClientSession : PacketSession
+	public class ClientSession : PacketSession
 	{
 		public int SessionId { get; set; }
 		
-		public void Send(IMessage packet)
+		public User User { get; set; }
+
+        public void Send(IMessage packet)
 		{
 			string msgName = packet.Descriptor.Name.Replace("_", string.Empty);
 			MsgId msgId = (MsgId)Enum.Parse(typeof(MsgId), msgName);

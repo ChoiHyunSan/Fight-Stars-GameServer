@@ -25,26 +25,27 @@ namespace Google.Protobuf.Protocol {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "Cg5Qcm90b2NvbC5wcm90bxIIUHJvdG9jb2waH2dvb2dsZS9wcm90b2J1Zi90",
-            "aW1lc3RhbXAucHJvdG8iPwoLQ19FbnRlclJvb20SDgoGcm9vbUlkGAEgASgJ",
-            "EhAKCHBhc3N3b3JkGAIgASgJEg4KBnVzZXJJZBgDIAEoBSKaAgoLU19FbnRl",
-            "clJvb20SEwoLcGxheWVyQ291bnQYASABKAUSNQoLcGxheWVySW5mb3MYAiAD",
-            "KAsyIC5Qcm90b2NvbC5TX0VudGVyUm9vbS5QbGF5ZXJJbmZvGiAKCFNwYXdu",
-            "UG9zEgkKAXgYASABKAUSCQoBeRgCIAEoBRpeCgpQbGF5ZXJJbmZvEg4KBnVz",
-            "ZXJJZBgBIAEoBRIOCgZza2luSWQYAiABKAUSMAoIc3Bhd25Qb3MYAyABKAsy",
-            "Hi5Qcm90b2NvbC5TX0VudGVyUm9vbS5TcGF3blBvcyI9CgtFbnRlclJlc3Vs",
-            "dBILCgdTVUNDRVNTEAASDgoKSU5WQUxJRF9JRBABEhEKDUFDQ0VTU19ERU5J",
-            "RUQQAiIlChNDX1JlYWR5Q29tcGxldGVHYW1lEg4KBnVzZXJJZBgBIAEoBSJE",
-            "ChNTX1JlYWR5Q29tcGxldGVHYW1lEi0KCXN0YXJ0VGltZRgBIAEoCzIaLmdv",
-            "b2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAqYQoFTXNnSWQSEAoMQ19FTlRFUl9S",
-            "T09NEAASEAoMU19FTlRFUl9ST09NEAESGQoVQ19SRUFEWV9DT01QTEVURV9H",
-            "QU1FEAISGQoVU19SRUFEWV9DT01QTEVURV9HQU1FEANCG6oCGEdvb2dsZS5Q",
-            "cm90b2J1Zi5Qcm90b2NvbGIGcHJvdG8z"));
+            "aW1lc3RhbXAucHJvdG8iUQoLQ19FbnRlclJvb20SDgoGcm9vbUlkGAEgASgJ",
+            "EhAKCHBhc3N3b3JkGAIgASgJEhAKCG5pY2tuYW1lGAMgASgJEg4KBnVzZXJJ",
+            "ZBgEIAEoBSLCAgoLU19FbnRlclJvb20SEwoLcGxheWVyQ291bnQYASABKAUS",
+            "NQoLcGxheWVySW5mb3MYAiADKAsyIC5Qcm90b2NvbC5TX0VudGVyUm9vbS5Q",
+            "bGF5ZXJJbmZvGiAKCFNwYXduUG9zEgkKAXgYASABKAUSCQoBeRgCIAEoBRqF",
+            "AQoKUGxheWVySW5mbxIOCgZ1c2VySWQYASABKAUSDgoGc2tpbklkGAIgASgF",
+            "EhMKC2NoYXJhY3RlcklkGAMgASgFEhAKCG5pY2tuYW1lGAQgASgJEjAKCHNw",
+            "YXduUG9zGAUgASgLMh4uUHJvdG9jb2wuU19FbnRlclJvb20uU3Bhd25Qb3Mi",
+            "PQoLRW50ZXJSZXN1bHQSCwoHU1VDQ0VTUxAAEg4KCklOVkFMSURfSUQQARIR",
+            "Cg1BQ0NFU1NfREVOSUVEEAIiJQoTQ19SZWFkeUNvbXBsZXRlR2FtZRIOCgZ1",
+            "c2VySWQYASABKAUiRAoTU19SZWFkeUNvbXBsZXRlR2FtZRItCglzdGFydFRp",
+            "bWUYASABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wKmEKBU1zZ0lk",
+            "EhAKDENfRU5URVJfUk9PTRAAEhAKDFNfRU5URVJfUk9PTRABEhkKFUNfUkVB",
+            "RFlfQ09NUExFVEVfR0FNRRACEhkKFVNfUkVBRFlfQ09NUExFVEVfR0FNRRAD",
+            "QhuqAhhHb29nbGUuUHJvdG9idWYuUHJvdG9jb2xiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), }, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_EnterRoom), global::Google.Protobuf.Protocol.C_EnterRoom.Parser, new[]{ "RoomId", "Password", "UserId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_EnterRoom), global::Google.Protobuf.Protocol.C_EnterRoom.Parser, new[]{ "RoomId", "Password", "Nickname", "UserId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_EnterRoom), global::Google.Protobuf.Protocol.S_EnterRoom.Parser, new[]{ "PlayerCount", "PlayerInfos" }, null, new[]{ typeof(global::Google.Protobuf.Protocol.S_EnterRoom.Types.EnterResult) }, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_EnterRoom.Types.SpawnPos), global::Google.Protobuf.Protocol.S_EnterRoom.Types.SpawnPos.Parser, new[]{ "X", "Y" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_EnterRoom.Types.PlayerInfo), global::Google.Protobuf.Protocol.S_EnterRoom.Types.PlayerInfo.Parser, new[]{ "UserId", "SkinId", "SpawnPos" }, null, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_EnterRoom.Types.PlayerInfo), global::Google.Protobuf.Protocol.S_EnterRoom.Types.PlayerInfo.Parser, new[]{ "UserId", "SkinId", "CharacterId", "Nickname", "SpawnPos" }, null, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_ReadyCompleteGame), global::Google.Protobuf.Protocol.C_ReadyCompleteGame.Parser, new[]{ "UserId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_ReadyCompleteGame), global::Google.Protobuf.Protocol.S_ReadyCompleteGame.Parser, new[]{ "StartTime" }, null, null, null, null)
           }));
@@ -90,6 +91,7 @@ namespace Google.Protobuf.Protocol {
     public C_EnterRoom(C_EnterRoom other) : this() {
       roomId_ = other.roomId_;
       password_ = other.password_;
+      nickname_ = other.nickname_;
       userId_ = other.userId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -121,8 +123,19 @@ namespace Google.Protobuf.Protocol {
       }
     }
 
+    /// <summary>Field number for the "nickname" field.</summary>
+    public const int NicknameFieldNumber = 3;
+    private string nickname_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Nickname {
+      get { return nickname_; }
+      set {
+        nickname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "userId" field.</summary>
-    public const int UserIdFieldNumber = 3;
+    public const int UserIdFieldNumber = 4;
     private int userId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int UserId {
@@ -147,6 +160,7 @@ namespace Google.Protobuf.Protocol {
       }
       if (RoomId != other.RoomId) return false;
       if (Password != other.Password) return false;
+      if (Nickname != other.Nickname) return false;
       if (UserId != other.UserId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -156,6 +170,7 @@ namespace Google.Protobuf.Protocol {
       int hash = 1;
       if (RoomId.Length != 0) hash ^= RoomId.GetHashCode();
       if (Password.Length != 0) hash ^= Password.GetHashCode();
+      if (Nickname.Length != 0) hash ^= Nickname.GetHashCode();
       if (UserId != 0) hash ^= UserId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -178,8 +193,12 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(18);
         output.WriteString(Password);
       }
+      if (Nickname.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Nickname);
+      }
       if (UserId != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(32);
         output.WriteInt32(UserId);
       }
       if (_unknownFields != null) {
@@ -195,6 +214,9 @@ namespace Google.Protobuf.Protocol {
       }
       if (Password.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Password);
+      }
+      if (Nickname.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Nickname);
       }
       if (UserId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(UserId);
@@ -215,6 +237,9 @@ namespace Google.Protobuf.Protocol {
       }
       if (other.Password.Length != 0) {
         Password = other.Password;
+      }
+      if (other.Nickname.Length != 0) {
+        Nickname = other.Nickname;
       }
       if (other.UserId != 0) {
         UserId = other.UserId;
@@ -238,7 +263,11 @@ namespace Google.Protobuf.Protocol {
             Password = input.ReadString();
             break;
           }
-          case 24: {
+          case 26: {
+            Nickname = input.ReadString();
+            break;
+          }
+          case 32: {
             UserId = input.ReadInt32();
             break;
           }
@@ -589,6 +618,8 @@ namespace Google.Protobuf.Protocol {
         public PlayerInfo(PlayerInfo other) : this() {
           userId_ = other.userId_;
           skinId_ = other.skinId_;
+          characterId_ = other.characterId_;
+          nickname_ = other.nickname_;
           spawnPos_ = other.spawnPos_ != null ? other.spawnPos_.Clone() : null;
           _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
         }
@@ -620,8 +651,30 @@ namespace Google.Protobuf.Protocol {
           }
         }
 
+        /// <summary>Field number for the "characterId" field.</summary>
+        public const int CharacterIdFieldNumber = 3;
+        private int characterId_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CharacterId {
+          get { return characterId_; }
+          set {
+            characterId_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "nickname" field.</summary>
+        public const int NicknameFieldNumber = 4;
+        private string nickname_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Nickname {
+          get { return nickname_; }
+          set {
+            nickname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
         /// <summary>Field number for the "spawnPos" field.</summary>
-        public const int SpawnPosFieldNumber = 3;
+        public const int SpawnPosFieldNumber = 5;
         private global::Google.Protobuf.Protocol.S_EnterRoom.Types.SpawnPos spawnPos_;
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public global::Google.Protobuf.Protocol.S_EnterRoom.Types.SpawnPos SpawnPos {
@@ -646,6 +699,8 @@ namespace Google.Protobuf.Protocol {
           }
           if (UserId != other.UserId) return false;
           if (SkinId != other.SkinId) return false;
+          if (CharacterId != other.CharacterId) return false;
+          if (Nickname != other.Nickname) return false;
           if (!object.Equals(SpawnPos, other.SpawnPos)) return false;
           return Equals(_unknownFields, other._unknownFields);
         }
@@ -655,6 +710,8 @@ namespace Google.Protobuf.Protocol {
           int hash = 1;
           if (UserId != 0) hash ^= UserId.GetHashCode();
           if (SkinId != 0) hash ^= SkinId.GetHashCode();
+          if (CharacterId != 0) hash ^= CharacterId.GetHashCode();
+          if (Nickname.Length != 0) hash ^= Nickname.GetHashCode();
           if (spawnPos_ != null) hash ^= SpawnPos.GetHashCode();
           if (_unknownFields != null) {
             hash ^= _unknownFields.GetHashCode();
@@ -677,8 +734,16 @@ namespace Google.Protobuf.Protocol {
             output.WriteRawTag(16);
             output.WriteInt32(SkinId);
           }
+          if (CharacterId != 0) {
+            output.WriteRawTag(24);
+            output.WriteInt32(CharacterId);
+          }
+          if (Nickname.Length != 0) {
+            output.WriteRawTag(34);
+            output.WriteString(Nickname);
+          }
           if (spawnPos_ != null) {
-            output.WriteRawTag(26);
+            output.WriteRawTag(42);
             output.WriteMessage(SpawnPos);
           }
           if (_unknownFields != null) {
@@ -694,6 +759,12 @@ namespace Google.Protobuf.Protocol {
           }
           if (SkinId != 0) {
             size += 1 + pb::CodedOutputStream.ComputeInt32Size(SkinId);
+          }
+          if (CharacterId != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeInt32Size(CharacterId);
+          }
+          if (Nickname.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Nickname);
           }
           if (spawnPos_ != null) {
             size += 1 + pb::CodedOutputStream.ComputeMessageSize(SpawnPos);
@@ -714,6 +785,12 @@ namespace Google.Protobuf.Protocol {
           }
           if (other.SkinId != 0) {
             SkinId = other.SkinId;
+          }
+          if (other.CharacterId != 0) {
+            CharacterId = other.CharacterId;
+          }
+          if (other.Nickname.Length != 0) {
+            Nickname = other.Nickname;
           }
           if (other.spawnPos_ != null) {
             if (spawnPos_ == null) {
@@ -740,7 +817,15 @@ namespace Google.Protobuf.Protocol {
                 SkinId = input.ReadInt32();
                 break;
               }
-              case 26: {
+              case 24: {
+                CharacterId = input.ReadInt32();
+                break;
+              }
+              case 34: {
+                Nickname = input.ReadString();
+                break;
+              }
+              case 42: {
                 if (spawnPos_ == null) {
                   SpawnPos = new global::Google.Protobuf.Protocol.S_EnterRoom.Types.SpawnPos();
                 }
