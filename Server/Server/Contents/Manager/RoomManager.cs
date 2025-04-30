@@ -76,7 +76,7 @@ namespace Server.Contents.Room
             switch (mode)
             {
                 case "deathmatch":
-                    room = new DeathMatch(mapDatas.GetValueOrDefault("deathmatch", null));
+                    room = new DeathMatch(mapData: mapDatas.GetValueOrDefault("deathmatch", null));
                     break;
                 default:
                     break;

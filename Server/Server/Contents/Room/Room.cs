@@ -16,8 +16,9 @@ namespace Server.Contents.Room
 
     public abstract class Room : IJobQueue
     {
-        private const int TickRate = 2;             // 초당 30 틱
+        private const int TickRate = 30;                        // 초당 30 틱
         private const double TickInterval = 1000.0 / TickRate;  // 밀리초 단위 (33.33ms)
+        private const int SyncIntervalTick = 5;                 // 틱 간격 (2틱마다 동기화)
 
         public string RoomId { get; set; }
         public string Password { get; set; }
@@ -43,6 +44,7 @@ namespace Server.Contents.Room
             {
                 Console.WriteLine("New Room Task Start");
                 DateTime _nextTickTime = DateTime.UtcNow;
+                int tickCount = 0; 
 
                 while (true)
                 {
@@ -52,19 +54,34 @@ namespace Server.Contents.Room
                         if (now >= _nextTickTime)
                         {
                             double deltaTime = TickInterval / 1000.0;
+
+                            // 1. 모든 오브젝트 업데이트 (이동, 충돌 등)
                             Update(deltaTime);
+
+                            tickCount++;
+
+                            // 2. 일정 틱 간격마다 위치 동기화 패킷 전송
+                            if (tickCount % SyncIntervalTick == 0)
+                            {
+                                BroadcastPositionUpdates();
+                            }
+
                             _nextTickTime = _nextTickTime.AddMilliseconds(TickInterval);
                         }
                     }
 
-                    if(State == RoomState.End)
-                    {
+                    if (State == RoomState.End)
                         break;
-                    }
+
                     await Task.Delay(1);
                 }
             });
             Task.Start();
+        }
+
+        private void BroadcastPositionUpdates()
+        {
+            
         }
 
         public abstract void Update(double deltaTime);
