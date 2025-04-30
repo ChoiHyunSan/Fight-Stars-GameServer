@@ -8,6 +8,8 @@ using ServerCore;
 using System.Net;
 using Google.Protobuf.Protocol;
 using Google.Protobuf;
+using Server.Contents.Room;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Server
 {
@@ -45,8 +47,17 @@ namespace Server
 		{
 			SessionManager.Instance.Remove(this);
 
-			Console.WriteLine($"OnDisconnected : {endPoint}");
-		}
+            Console.WriteLine($"OnDisconnected : {endPoint}");
+            Room? room = RoomManager.GetRoom(User.RoomId);
+            if (room != null)
+			{
+                Console.WriteLine($"Leave User. User Id: {User.UserId}");
+                if(room.LeaveUser(User.UserId) == 0)
+				{
+					RoomManager.RemoveRoom(User.RoomId);
+                }
+            }
+        }
 
 		public override void OnSend(int numOfBytes)
 		{

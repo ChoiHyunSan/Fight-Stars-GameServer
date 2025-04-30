@@ -1,7 +1,6 @@
 ﻿using Server;
-using Server.Contents.Room;
 
-public enum PlayerState 
+public enum PlayerState
 {
     None,   // 초기 생성 단계
     Data,   // 데이터를 전달받은 상태
@@ -10,7 +9,7 @@ public enum PlayerState
     Exit,   // 게임에서 나간 상태
 }
 
-public class User
+public class User : GameObject
 {
     public int UserId { get; set; }
     public int CharacterId { get; set; }
@@ -27,5 +26,20 @@ public class User
         CharacterId = characterId;
         SkinId = skinId;
         RoomId = roomId;
+    }
+
+    public override void Update(double deltaTime)
+    {
+        Console.WriteLine($"Player Update! Nickname : {nickname}");
+
+        Move();
+        
+    }
+
+    private void Move()
+    {
+        // 이동 
+
+        // 충돌 체크 (ex. 벽에 충돌한 경우에는 기존 위치로 되돌리기)
     }
 }

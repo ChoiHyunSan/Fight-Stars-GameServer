@@ -6,8 +6,14 @@ namespace Server.Contents.Room
     {
         // RoomId를 키로 하는 방 목록
         public static Dictionary<string, Room> Rooms = new Dictionary<string, Room>();
+        public static Dictionary<string, MapData> mapDatas = new Dictionary<string, MapData>();
 
         public static object _lock = new object();
+
+        public static void init()
+        {
+            
+        }
 
         public static Room? CreateRoom(string mode, List<UserGameInfo> userInfos)
         {
@@ -43,6 +49,9 @@ namespace Server.Contents.Room
             {
                 if (Rooms.ContainsKey(roomId))
                 {
+                    Room room = Rooms[roomId];
+                    room.Release();
+
                     Rooms.Remove(roomId);
                     Console.WriteLine($"Room Removed! Room Id : {roomId}");
                 }
@@ -67,7 +76,7 @@ namespace Server.Contents.Room
             switch (mode)
             {
                 case "deathmatch":
-                    room = new DeathMatch();
+                    room = new DeathMatch(mapDatas.GetValueOrDefault("deathmatch", null));
                     break;
                 default:
                     break;
