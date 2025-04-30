@@ -21,7 +21,7 @@ namespace Server.Contents.Room
                     Console.WriteLine($"UserId : {info.UserId}, CharacterId : {info.CharacterId}, Skin ID : {info.SkinId}");
                 }
 
-                var password = "password";  // TODO : 비밀번호 생성 로직 추가
+                var password = PasswordUtil.CreatePassword();
 
                 // TODO : 방 생성 로직 추가
                 var room = CreateRoomByMode(mode);

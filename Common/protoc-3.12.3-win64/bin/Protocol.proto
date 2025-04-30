@@ -19,13 +19,16 @@ message C_EnterRoom {
 }
 
 message S_EnterRoom {
-  int32 playerCount = 1;
-  repeated PlayerInfo playerInfos = 2;
+
+  EnterResult enterResult = 1;
+  int32 playerCount = 2;
+  repeated PlayerInfo playerInfos = 3;
 
   enum EnterResult {
     SUCCESS = 0;
     INVALID_ID = 1;
     ACCESS_DENIED = 2;
+    ALREADY_IN_ROOM = 3;
   }
 
   message SpawnPos {

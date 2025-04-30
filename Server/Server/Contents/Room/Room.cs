@@ -37,45 +37,78 @@ namespace Server.Contents.Room
 
         public void EnterUser(int userId, string password, string nickname, ClientSession session)
         {
-            // TODO : 비밀번호 체크
+            // 초기 결과값 설정
+            EnterResult result = EnterResult.Success;
+            User? user = null;
 
-            // TODO : 유저 정보 체크
-            lock(_lock)
+            lock (_lock)
             {
-                User? user = UserInfos.Find(u => u.UserId == userId);
-                if(user == null)
+                // 1. 사용자 조회
+                user = UserInfos.Find(u => u.UserId == userId);
+                if (user == null)
                 {
                     Console.WriteLine($"User not found! UserId: {userId}");
-                    return;
-                }
+                    result = EnterResult.InvalidId;
 
-                if (user.State != PlayerState.None)
-                {
-                    Console.WriteLine($"User already in game! UserId: {userId}");
-                    return;
-                }
-
-                user.nickname = nickname;
-                user.Session = session;
-                session.User = user;
-
-                if (user != null)
-                {
-                    S_EnterRoom enterRoom = new S_EnterRoom()
+                    // 사용자가 없는 경우에도 실패 응답을 보내기 위해 임시 응답 생성
+                    S_EnterRoom failResponse = new S_EnterRoom()
                     {
+                        EnterResult = result,
                         PlayerCount = UserInfos.Count
                     };
-                    enterRoom.PlayerInfos.AddRange(UserInfos.Select(u => new PlayerInfo()
-                    {
-                        UserId = u.UserId,
-                        SkinId = u.SkinId,
-                        SpawnPos = GetSpwanPos(u.UserId),
-                    }));
-                    Console.WriteLine(enterRoom);
-                    user.Session.Send(enterRoom);
+                    session.Send(failResponse);
+                    return;
+                }
+
+                // 2. 비밀번호 검증
+                if (!PasswordUtil.Verify(this.Password, password))
+                {
+                    Console.WriteLine($"Password not match! RoomId: {RoomId}, UserId: {userId}");
+                    result = EnterResult.AccessDenied;
+                }
+                // 3. 사용자 상태 검증
+                else if (user.State != PlayerState.None)
+                {
+                    Console.WriteLine($"User already in game! UserId: {userId}");
+                    result = EnterResult.AlreadyInRoom;
+                }
+                // 4. 모든 검증 통과시 사용자 정보 업데이트
+                else
+                {
+                    // 사용자 정보 업데이트
+                    user.nickname = nickname;
+                    user.Session = session;
+                    session.User = user;
                     user.State = PlayerState.Data;
                 }
-            }        
+
+                // 응답 생성 및 전송 
+                S_EnterRoom enterRoom = new S_EnterRoom()
+                {
+                    EnterResult = result,
+                    PlayerCount = UserInfos.Count
+                };
+
+                // 플레이어 정보 추가
+                enterRoom.PlayerInfos.AddRange(UserInfos.Select(u => new PlayerInfo()
+                {
+                    UserId = u.UserId,
+                    SkinId = u.SkinId,
+                    SpawnPos = GetSpwanPos(u.UserId),
+                }));
+
+                Console.WriteLine(enterRoom);
+
+                // 사용자 세션을 통해 응답 전송
+                if (result == EnterResult.Success)
+                {
+                    user.Session.Send(enterRoom); 
+                }
+                else
+                {
+                    session.Send(enterRoom); 
+                }
+            }
         }
 
         public void AddReadyPlayer(User user)

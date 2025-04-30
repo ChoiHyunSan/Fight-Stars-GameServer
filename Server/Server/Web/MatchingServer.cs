@@ -32,7 +32,7 @@ namespace Server.Web
                 var response = new RoomCreateResponse
                 {
                     RoomId = room.RoomId,
-                    Password = room.Password,
+                    Password = PasswordUtil.Encode(room.Password),
 
                     // TODO : 유동적으로 변경 가능하도록 수정 필요
                     Ip = "127.0.0.1",   // 고정 IP
