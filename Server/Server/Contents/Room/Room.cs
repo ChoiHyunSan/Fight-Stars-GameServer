@@ -3,7 +3,9 @@ using Google.Protobuf.Protocol;
 using Google.Protobuf.WellKnownTypes;
 using Server.Web;
 using ServerCore;
+using System.Numerics;
 using static Google.Protobuf.Protocol.S_EnterRoom.Types;
+using static Google.Protobuf.Protocol.S_PositionUpdate.Types;
 
 namespace Server.Contents.Room
 {
@@ -81,7 +83,16 @@ namespace Server.Contents.Room
 
         private void BroadcastPositionUpdates()
         {
-            
+            S_PositionUpdate positionUpdatePacket = new S_PositionUpdate();
+            positionUpdatePacket.PlayerPosUpdates.AddRange(Users.Select(user => new PlayerPosUpdate()
+            {
+                UserId = user.UserId,
+                X = user.Position.X,
+                Y = user.Position.Y,
+                Vx = user.Velocity.X,
+                Vy = user.Velocity.Y,
+            }));
+            Broadcast(positionUpdatePacket);
         }
 
         public abstract void Update(double deltaTime);
@@ -251,6 +262,23 @@ namespace Server.Contents.Room
                 // 방 종료
                 State = RoomState.End;
                 Console.WriteLine($"Room Release, Room ID : {RoomId}");
+            }
+        }
+
+        public void UpdatePlayerDir(User user, float dx, float dy)
+        {
+            if (user == null)
+            {
+                return;
+            }
+
+            lock (_lock)
+            {
+                Vector2 newDir = new Vector2(dx, dy);
+                if (Users.Find(u => u.UserId == user.UserId) != null)
+                {
+                    user.Velocity = newDir;
+                }
             }
         }
     }

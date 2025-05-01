@@ -38,10 +38,16 @@ namespace Google.Protobuf.Protocol {
             "QUxJRF9JRBABEhEKDUFDQ0VTU19ERU5JRUQQAhITCg9BTFJFQURZX0lOX1JP",
             "T00QAyIlChNDX1JlYWR5Q29tcGxldGVHYW1lEg4KBnVzZXJJZBgBIAEoBSJE",
             "ChNTX1JlYWR5Q29tcGxldGVHYW1lEi0KCXN0YXJ0VGltZRgBIAEoCzIaLmdv",
-            "b2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAqYQoFTXNnSWQSEAoMQ19FTlRFUl9S",
-            "T09NEAASEAoMU19FTlRFUl9ST09NEAESGQoVQ19SRUFEWV9DT01QTEVURV9H",
-            "QU1FEAISGQoVU19SRUFEWV9DT01QTEVURV9HQU1FEANCG6oCGEdvb2dsZS5Q",
-            "cm90b2J1Zi5Qcm90b2NvbGIGcHJvdG8z"));
+            "b2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiMAoGQ19Nb3ZlEg4KBnVzZXJJZBgB",
+            "IAEoBRIKCgJkeBgCIAEoAhIKCgJkeRgDIAEoAiKpAQoQU19Qb3NpdGlvblVw",
+            "ZGF0ZRJEChBwbGF5ZXJQb3NVcGRhdGVzGAEgAygLMiouUHJvdG9jb2wuU19Q",
+            "b3NpdGlvblVwZGF0ZS5QbGF5ZXJQb3NVcGRhdGUaTwoPUGxheWVyUG9zVXBk",
+            "YXRlEg4KBnVzZXJJZBgBIAEoBRIJCgF4GAIgASgCEgkKAXkYAyABKAISCgoC",
+            "dngYBCABKAISCgoCdnkYBSABKAIqhAEKBU1zZ0lkEhAKDENfRU5URVJfUk9P",
+            "TRAAEhAKDFNfRU5URVJfUk9PTRABEhkKFUNfUkVBRFlfQ09NUExFVEVfR0FN",
+            "RRACEhkKFVNfUkVBRFlfQ09NUExFVEVfR0FNRRADEgoKBkNfTU9WRRAEEhUK",
+            "EVNfUE9TSVRJT05fVVBEQVRFEAVCG6oCGEdvb2dsZS5Qcm90b2J1Zi5Qcm90",
+            "b2NvbGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -49,7 +55,9 @@ namespace Google.Protobuf.Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_EnterRoom), global::Google.Protobuf.Protocol.S_EnterRoom.Parser, new[]{ "EnterResult", "PlayerCount", "PlayerInfos" }, null, new[]{ typeof(global::Google.Protobuf.Protocol.S_EnterRoom.Types.EnterResult) }, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_EnterRoom.Types.SpawnPos), global::Google.Protobuf.Protocol.S_EnterRoom.Types.SpawnPos.Parser, new[]{ "X", "Y" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_EnterRoom.Types.PlayerInfo), global::Google.Protobuf.Protocol.S_EnterRoom.Types.PlayerInfo.Parser, new[]{ "UserId", "SkinId", "CharacterId", "Nickname", "SpawnPos" }, null, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_ReadyCompleteGame), global::Google.Protobuf.Protocol.C_ReadyCompleteGame.Parser, new[]{ "UserId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_ReadyCompleteGame), global::Google.Protobuf.Protocol.S_ReadyCompleteGame.Parser, new[]{ "StartTime" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_ReadyCompleteGame), global::Google.Protobuf.Protocol.S_ReadyCompleteGame.Parser, new[]{ "StartTime" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_Move), global::Google.Protobuf.Protocol.C_Move.Parser, new[]{ "UserId", "Dx", "Dy" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_PositionUpdate), global::Google.Protobuf.Protocol.S_PositionUpdate.Parser, new[]{ "PlayerPosUpdates" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_PositionUpdate.Types.PlayerPosUpdate), global::Google.Protobuf.Protocol.S_PositionUpdate.Types.PlayerPosUpdate.Parser, new[]{ "UserId", "X", "Y", "Vx", "Vy" }, null, null, null, null)})
           }));
     }
     #endregion
@@ -61,6 +69,8 @@ namespace Google.Protobuf.Protocol {
     [pbr::OriginalName("S_ENTER_ROOM")] SEnterRoom = 1,
     [pbr::OriginalName("C_READY_COMPLETE_GAME")] CReadyCompleteGame = 2,
     [pbr::OriginalName("S_READY_COMPLETE_GAME")] SReadyCompleteGame = 3,
+    [pbr::OriginalName("C_MOVE")] CMove = 4,
+    [pbr::OriginalName("S_POSITION_UPDATE")] SPositionUpdate = 5,
   }
 
   #endregion
@@ -1135,6 +1145,560 @@ namespace Google.Protobuf.Protocol {
         }
       }
     }
+
+  }
+
+  public sealed partial class C_Move : pb::IMessage<C_Move> {
+    private static readonly pb::MessageParser<C_Move> _parser = new pb::MessageParser<C_Move>(() => new C_Move());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<C_Move> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C_Move() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C_Move(C_Move other) : this() {
+      userId_ = other.userId_;
+      dx_ = other.dx_;
+      dy_ = other.dy_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C_Move Clone() {
+      return new C_Move(this);
+    }
+
+    /// <summary>Field number for the "userId" field.</summary>
+    public const int UserIdFieldNumber = 1;
+    private int userId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int UserId {
+      get { return userId_; }
+      set {
+        userId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "dx" field.</summary>
+    public const int DxFieldNumber = 2;
+    private float dx_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float Dx {
+      get { return dx_; }
+      set {
+        dx_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "dy" field.</summary>
+    public const int DyFieldNumber = 3;
+    private float dy_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float Dy {
+      get { return dy_; }
+      set {
+        dy_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as C_Move);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(C_Move other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (UserId != other.UserId) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Dx, other.Dx)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Dy, other.Dy)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (UserId != 0) hash ^= UserId.GetHashCode();
+      if (Dx != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Dx);
+      if (Dy != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Dy);
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (UserId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(UserId);
+      }
+      if (Dx != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(Dx);
+      }
+      if (Dy != 0F) {
+        output.WriteRawTag(29);
+        output.WriteFloat(Dy);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (UserId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(UserId);
+      }
+      if (Dx != 0F) {
+        size += 1 + 4;
+      }
+      if (Dy != 0F) {
+        size += 1 + 4;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(C_Move other) {
+      if (other == null) {
+        return;
+      }
+      if (other.UserId != 0) {
+        UserId = other.UserId;
+      }
+      if (other.Dx != 0F) {
+        Dx = other.Dx;
+      }
+      if (other.Dy != 0F) {
+        Dy = other.Dy;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            UserId = input.ReadInt32();
+            break;
+          }
+          case 21: {
+            Dx = input.ReadFloat();
+            break;
+          }
+          case 29: {
+            Dy = input.ReadFloat();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class S_PositionUpdate : pb::IMessage<S_PositionUpdate> {
+    private static readonly pb::MessageParser<S_PositionUpdate> _parser = new pb::MessageParser<S_PositionUpdate>(() => new S_PositionUpdate());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<S_PositionUpdate> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S_PositionUpdate() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S_PositionUpdate(S_PositionUpdate other) : this() {
+      playerPosUpdates_ = other.playerPosUpdates_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S_PositionUpdate Clone() {
+      return new S_PositionUpdate(this);
+    }
+
+    /// <summary>Field number for the "playerPosUpdates" field.</summary>
+    public const int PlayerPosUpdatesFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::Google.Protobuf.Protocol.S_PositionUpdate.Types.PlayerPosUpdate> _repeated_playerPosUpdates_codec
+        = pb::FieldCodec.ForMessage(10, global::Google.Protobuf.Protocol.S_PositionUpdate.Types.PlayerPosUpdate.Parser);
+    private readonly pbc::RepeatedField<global::Google.Protobuf.Protocol.S_PositionUpdate.Types.PlayerPosUpdate> playerPosUpdates_ = new pbc::RepeatedField<global::Google.Protobuf.Protocol.S_PositionUpdate.Types.PlayerPosUpdate>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Google.Protobuf.Protocol.S_PositionUpdate.Types.PlayerPosUpdate> PlayerPosUpdates {
+      get { return playerPosUpdates_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as S_PositionUpdate);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(S_PositionUpdate other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!playerPosUpdates_.Equals(other.playerPosUpdates_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= playerPosUpdates_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      playerPosUpdates_.WriteTo(output, _repeated_playerPosUpdates_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += playerPosUpdates_.CalculateSize(_repeated_playerPosUpdates_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(S_PositionUpdate other) {
+      if (other == null) {
+        return;
+      }
+      playerPosUpdates_.Add(other.playerPosUpdates_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            playerPosUpdates_.AddEntriesFrom(input, _repeated_playerPosUpdates_codec);
+            break;
+          }
+        }
+      }
+    }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the S_PositionUpdate message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public sealed partial class PlayerPosUpdate : pb::IMessage<PlayerPosUpdate> {
+        private static readonly pb::MessageParser<PlayerPosUpdate> _parser = new pb::MessageParser<PlayerPosUpdate>(() => new PlayerPosUpdate());
+        private pb::UnknownFieldSet _unknownFields;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<PlayerPosUpdate> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Google.Protobuf.Protocol.S_PositionUpdate.Descriptor.NestedTypes[0]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PlayerPosUpdate() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PlayerPosUpdate(PlayerPosUpdate other) : this() {
+          userId_ = other.userId_;
+          x_ = other.x_;
+          y_ = other.y_;
+          vx_ = other.vx_;
+          vy_ = other.vy_;
+          _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PlayerPosUpdate Clone() {
+          return new PlayerPosUpdate(this);
+        }
+
+        /// <summary>Field number for the "userId" field.</summary>
+        public const int UserIdFieldNumber = 1;
+        private int userId_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int UserId {
+          get { return userId_; }
+          set {
+            userId_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "x" field.</summary>
+        public const int XFieldNumber = 2;
+        private float x_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public float X {
+          get { return x_; }
+          set {
+            x_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "y" field.</summary>
+        public const int YFieldNumber = 3;
+        private float y_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public float Y {
+          get { return y_; }
+          set {
+            y_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "vx" field.</summary>
+        public const int VxFieldNumber = 4;
+        private float vx_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public float Vx {
+          get { return vx_; }
+          set {
+            vx_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "vy" field.</summary>
+        public const int VyFieldNumber = 5;
+        private float vy_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public float Vy {
+          get { return vy_; }
+          set {
+            vy_ = value;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as PlayerPosUpdate);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(PlayerPosUpdate other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (UserId != other.UserId) return false;
+          if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(X, other.X)) return false;
+          if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Y, other.Y)) return false;
+          if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Vx, other.Vx)) return false;
+          if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Vy, other.Vy)) return false;
+          return Equals(_unknownFields, other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (UserId != 0) hash ^= UserId.GetHashCode();
+          if (X != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(X);
+          if (Y != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Y);
+          if (Vx != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Vx);
+          if (Vy != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Vy);
+          if (_unknownFields != null) {
+            hash ^= _unknownFields.GetHashCode();
+          }
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (UserId != 0) {
+            output.WriteRawTag(8);
+            output.WriteInt32(UserId);
+          }
+          if (X != 0F) {
+            output.WriteRawTag(21);
+            output.WriteFloat(X);
+          }
+          if (Y != 0F) {
+            output.WriteRawTag(29);
+            output.WriteFloat(Y);
+          }
+          if (Vx != 0F) {
+            output.WriteRawTag(37);
+            output.WriteFloat(Vx);
+          }
+          if (Vy != 0F) {
+            output.WriteRawTag(45);
+            output.WriteFloat(Vy);
+          }
+          if (_unknownFields != null) {
+            _unknownFields.WriteTo(output);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (UserId != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeInt32Size(UserId);
+          }
+          if (X != 0F) {
+            size += 1 + 4;
+          }
+          if (Y != 0F) {
+            size += 1 + 4;
+          }
+          if (Vx != 0F) {
+            size += 1 + 4;
+          }
+          if (Vy != 0F) {
+            size += 1 + 4;
+          }
+          if (_unknownFields != null) {
+            size += _unknownFields.CalculateSize();
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(PlayerPosUpdate other) {
+          if (other == null) {
+            return;
+          }
+          if (other.UserId != 0) {
+            UserId = other.UserId;
+          }
+          if (other.X != 0F) {
+            X = other.X;
+          }
+          if (other.Y != 0F) {
+            Y = other.Y;
+          }
+          if (other.Vx != 0F) {
+            Vx = other.Vx;
+          }
+          if (other.Vy != 0F) {
+            Vy = other.Vy;
+          }
+          _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+                break;
+              case 8: {
+                UserId = input.ReadInt32();
+                break;
+              }
+              case 21: {
+                X = input.ReadFloat();
+                break;
+              }
+              case 29: {
+                Y = input.ReadFloat();
+                break;
+              }
+              case 37: {
+                Vx = input.ReadFloat();
+                break;
+              }
+              case 45: {
+                Vy = input.ReadFloat();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+    }
+    #endregion
 
   }
 

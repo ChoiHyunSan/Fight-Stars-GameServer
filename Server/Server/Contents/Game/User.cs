@@ -1,4 +1,5 @@
 ﻿using Server;
+using System.Numerics;
 
 public enum PlayerState
 {
@@ -11,6 +12,8 @@ public enum PlayerState
 
 public class User : GameObject
 {
+    private const float Speed = 5.0f; // 이동 속도
+
     public int UserId { get; set; }
     public int CharacterId { get; set; }
     public int SkinId { get; set; }
@@ -30,16 +33,25 @@ public class User : GameObject
 
     public override void Update(double deltaTime)
     {
-        Console.WriteLine($"Player Update! Nickname : {nickname}");
-
-        Move();
-        
+        Move(deltaTime);
     }
 
-    private void Move()
+    private void Move(double deltaTime)
     {
         // 이동 
+        if (Velocity == Vector2.Zero)
+        {
+            Velocity = Vector2.Zero;
+            return;
+        }
+
+        Vector2 normalizedVector = Vector2.Normalize(Velocity);
+        Vector2 move = normalizedVector * Speed * (float)deltaTime;
+        Vector2 newPos = Position + move;
 
         // 충돌 체크 (ex. 벽에 충돌한 경우에는 기존 위치로 되돌리기)
+        Position = newPos;
+
+        Console.WriteLine($"Player {nickname}`s current Position is {Position}");
     }
 }

@@ -54,4 +54,25 @@ class PacketHandler
         room.AddReadyPlayer(clientSession.User);
 
     }
+
+    public static void C_MoveHandler(PacketSession session, IMessage message)
+    {
+        C_Move? movePacket = message as C_Move;
+        ClientSession? clientSession = session as ClientSession;
+        if (movePacket == null || clientSession == null)
+        {
+            Console.WriteLine("Invalid packet or session. in C_MoveHandler");
+            return;
+        }
+    
+        // TODO: 플레이어의 이동 방향을 변경
+        Room room = RoomManager.GetRoom(clientSession.User.RoomId);
+        if(room == null)
+        {
+            Console.WriteLine($"Room not found! RoomId: {clientSession.User.RoomId}");
+            return;
+        }
+
+        room.UpdatePlayerDir(clientSession.User, movePacket.Dx, movePacket.Dy);
+    }
 }

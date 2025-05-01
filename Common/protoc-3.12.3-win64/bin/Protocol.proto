@@ -9,6 +9,8 @@ enum MsgId {
   S_ENTER_ROOM = 1;
   C_READY_COMPLETE_GAME = 2;
   S_READY_COMPLETE_GAME = 3;
+  C_MOVE = 4;
+  S_POSITION_UPDATE = 5;
 }
 
 message C_EnterRoom {
@@ -51,4 +53,23 @@ message C_ReadyCompleteGame {
 
 message S_ReadyCompleteGame {
   google.protobuf.Timestamp startTime = 1;
+}
+
+message C_Move{
+    int32 userId = 1;
+    float dx = 2;
+    float dy = 3;
+}
+
+message S_PositionUpdate{
+    
+    repeated PlayerPosUpdate playerPosUpdates = 1;
+
+    message PlayerPosUpdate{
+        int32 userId = 1;
+        float x = 2;
+        float y = 3;
+        float vx = 4;
+        float vy = 5;
+    }
 }
