@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Google.Protobuf;
 using Google.Protobuf.Protocol;
+using Server.Contents.Room;
 using Server.Web;
 using ServerCore;
 
@@ -24,6 +25,9 @@ namespace Server
 		static void Main(string[] args)
 		{
             MatchingServer.Start(args);
+
+			// Room Data 넘기기
+			RoomManager.init();
 
             // DNS (Domain Name System)
             string host = Dns.GetHostName();

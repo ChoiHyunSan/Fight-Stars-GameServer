@@ -11,6 +11,12 @@ enum MsgId {
   S_READY_COMPLETE_GAME = 3;
   C_MOVE = 4;
   S_POSITION_UPDATE = 5;
+  C_FIRE = 6;
+  S_FIRE = 7;
+  S_ATTACK = 8;
+  S_DIE = 9;
+  S_RESPAWN = 10;
+  S_DESTROY_PROJECTILE = 11;
 }
 
 message C_EnterRoom {
@@ -33,11 +39,6 @@ message S_EnterRoom {
     ALREADY_IN_ROOM = 3;
   }
 
-  message SpawnPos {
-    int32 x = 1;
-    int32 y = 2;
-  }
-
   message PlayerInfo {
     int32 userId = 1;
     int32 skinId = 2;
@@ -45,6 +46,11 @@ message S_EnterRoom {
     string nickname = 4;
     SpawnPos spawnPos = 5;
   }
+}
+
+message SpawnPos {
+    int32 x = 1;
+    int32 y = 2;
 }
 
 message C_ReadyCompleteGame {
@@ -73,3 +79,53 @@ message S_PositionUpdate{
         float vy = 5;
     }
 }
+
+message C_Fire{
+    float vx = 1;
+    float vy = 2;
+}
+
+message S_Fire{
+    float x = 1;
+    float y = 2;
+    float vx = 3;
+    float vy = 4;
+
+    ProjectileInfo projectileInfo = 5; 
+
+    message ProjectileInfo{
+        int32 type = 1;
+        int32 damage = 2;
+        int32 userId = 3;
+        string team = 4;
+        float speed = 5;
+        int32 projectileId = 6;
+    }
+}
+
+message S_Attack{
+    int32 userId = 1;
+    int32 hp = 2;
+    int32 projectileId = 3;
+}
+
+message S_Die{
+    int32 dieUserId = 1;
+    int32 killUserId = 2;
+    KillScore score = 3;
+
+    message KillScore{
+        int32 red = 1;
+        int32 blue = 2;
+    }
+}
+
+message S_DestroyProjectile{
+    int32 projectileId = 1;
+}
+
+message S_Respawn{
+    int32 userId = 1;
+    SpawnPos spawnPos = 2;
+}
+

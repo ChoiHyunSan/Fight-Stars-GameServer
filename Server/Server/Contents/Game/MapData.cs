@@ -7,28 +7,39 @@ public class MapData
 
     private bool[,] _collision;
 
-    public MapData(int[,] rawMap)
+    private int _xOffset;
+    private int _yOffset;
+
+    public MapData(int xMin, int xMax, int yMin, int yMax, string[] rawMapLines)
     {
-        Height = rawMap.GetLength(0);
-        Width = rawMap.GetLength(1);
+        Width = xMax - xMin + 1;
+        Height = yMax - yMin + 1;
+
+        _xOffset = -xMin;
+        _yOffset = -yMin;
+
         _collision = new bool[Width, Height];
 
         for (int y = 0; y < Height; y++)
         {
+            // 줄이 위에서 아래로 되어있기 때문에 y를 반대로 매핑
+            string line = rawMapLines[y];
+            int actualY = Height - 1 - y;
+
             for (int x = 0; x < Width; x++)
             {
-                _collision[x, y] = (rawMap[y, x] == 1); // 1이면 벽으로 간주
+                _collision[x, actualY] = line[x] == '1';
             }
         }
     }
 
     public bool IsBlocked(Vector2 position)
     {
-        int x = (int)Math.Floor(position.X);
-        int y = (int)Math.Floor(position.Y);
+        int x = (int)Math.Floor(position.X + 0.5f) + _xOffset;
+        int y = (int)Math.Floor(position.Y + 0.5f) + _yOffset;
 
         if (x < 0 || x >= Width || y < 0 || y >= Height)
-            return true; // 맵 밖 = 벽으로 간주
+            return true;
 
         return _collision[x, y];
     }

@@ -45,10 +45,10 @@ class PacketHandler
             return;
         }
 
-        Room? room = RoomManager.GetRoom(clientSession.User.RoomId);
+        Room? room = clientSession.User.room;
         if (room == null)
         {
-            Console.WriteLine($"Room not found! RoomId: {clientSession.User.RoomId}");
+            Console.WriteLine($"Room not found! RoomId: {clientSession.User.room}");
             return;
         }
         room.AddReadyPlayer(clientSession.User);
@@ -64,15 +64,35 @@ class PacketHandler
             Console.WriteLine("Invalid packet or session. in C_MoveHandler");
             return;
         }
-    
+
         // TODO: 플레이어의 이동 방향을 변경
-        Room room = RoomManager.GetRoom(clientSession.User.RoomId);
-        if(room == null)
+        Room? room = clientSession.User.room;
+        if (room == null)
         {
-            Console.WriteLine($"Room not found! RoomId: {clientSession.User.RoomId}");
+            Console.WriteLine($"Room not found! RoomId: {clientSession.User.room}");
             return;
         }
 
         room.UpdatePlayerDir(clientSession.User, movePacket.Dx, movePacket.Dy);
+    }
+
+    public static void C_FireHandler(PacketSession session, IMessage message)
+    {
+        C_Fire? firePacket = message as C_Fire;
+        ClientSession? clientSession = session as ClientSession;
+        if(firePacket == null || clientSession == null)
+        {
+            Console.WriteLine("Invalid packet or session. in C_Fire");
+            return;
+        }
+
+        Room? room = clientSession.User.room;
+        if (room == null)
+        {
+            Console.WriteLine($"Room not found! RoomId: {clientSession.User.room}");
+            return;
+        }
+
+        room.CreateProjectile(clientSession.User, firePacket.Vx, firePacket.Vy);
     }
 }

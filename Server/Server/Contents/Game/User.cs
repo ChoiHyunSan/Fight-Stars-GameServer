@@ -1,4 +1,5 @@
 ﻿using Server;
+using Server.Contents.Room;
 using System.Numerics;
 
 public enum PlayerState
@@ -10,25 +11,33 @@ public enum PlayerState
     Exit,   // 게임에서 나간 상태
 }
 
+public enum Team
+{
+    Red,
+    Blue
+}
+
 public class User : GameObject
 {
-    private const float Speed = 5.0f; // 이동 속도
+    private const float speed = 5.0f; // 이동 속도
 
-    public int UserId { get; set; }
-    public int CharacterId { get; set; }
-    public int SkinId { get; set; }
+    public int userId { get; set; }
+    public int characterId { get; set; }
+    public int skinId { get; set; }
 
     public string nickname { get; set; } = string.Empty;
-    public PlayerState State { get; set; } = PlayerState.None;
-    public ClientSession Session { get; set; } = null;
-    public string RoomId { get; set; } = string.Empty;
+    public PlayerState state { get; set; } = PlayerState.None;
+    public ClientSession session { get; set; } = null;
+    public Room room { get; set; }
 
-    public User(int userId, int characterId, int skinId, string roomId)
+    public Team team { get; set; }
+
+    public User(int userId, int characterId, int skinId, Room room)
     {
-        UserId = userId;
-        CharacterId = characterId;
-        SkinId = skinId;
-        RoomId = roomId;
+        this.userId = userId;
+        this.characterId = characterId;
+        this.skinId = skinId;
+        this.room = room;
     }
 
     public override void Update(double deltaTime)
@@ -38,19 +47,25 @@ public class User : GameObject
 
     private void Move(double deltaTime)
     {
-        // 이동 
         if (Velocity == Vector2.Zero)
-        {
-            Velocity = Vector2.Zero;
             return;
-        }
 
         Vector2 normalizedVector = Vector2.Normalize(Velocity);
-        Vector2 move = normalizedVector * Speed * (float)deltaTime;
-        Vector2 newPos = Position + move;
+        Vector2 move = normalizedVector * speed * (float)deltaTime;
 
-        // 충돌 체크 (ex. 벽에 충돌한 경우에는 기존 위치로 되돌리기)
-        Position = newPos;
+        Vector2 tentativePos = Position;
+
+        // X축 이동 먼저
+        Vector2 newPosX = tentativePos + new Vector2(move.X, 0);
+        if (!room.Map.IsBlocked(newPosX))
+            tentativePos = newPosX;
+
+        // Y축 이동
+        Vector2 newPosY = tentativePos + new Vector2(0, move.Y);
+        if (!room.Map.IsBlocked(newPosY))
+            tentativePos = newPosY;
+
+        Position = tentativePos;
 
         Console.WriteLine($"Player {nickname}`s current Position is {Position}");
     }

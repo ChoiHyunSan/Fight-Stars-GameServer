@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Net.Sockets;
-using System.Threading;
-using System.Threading.Tasks;
-using ServerCore;
+﻿using ServerCore;
 using System.Net;
 using Google.Protobuf.Protocol;
 using Google.Protobuf;
 using Server.Contents.Room;
-using Microsoft.AspNetCore.SignalR;
 
 namespace Server
 {
@@ -48,13 +41,13 @@ namespace Server
 			SessionManager.Instance.Remove(this);
 
             Console.WriteLine($"OnDisconnected : {endPoint}");
-            Room? room = RoomManager.GetRoom(User.RoomId);
+            Room? room = User.room;
             if (room != null)
 			{
-                Console.WriteLine($"Leave User. User Id: {User.UserId}");
-                if(room.LeaveUser(User.UserId) == 0)
+                Console.WriteLine($"Leave User. User Id: {User.userId}");
+                if(room.LeaveUser(User.userId) == 0)
 				{
-					RoomManager.RemoveRoom(User.RoomId);
+					RoomManager.RemoveRoom(room.RoomId);
                 }
             }
         }

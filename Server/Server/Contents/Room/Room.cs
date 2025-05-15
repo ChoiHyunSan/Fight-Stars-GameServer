@@ -35,6 +35,11 @@ namespace Server.Contents.Room
 
         // 방에 참여한 유저 정보 
         public List<User> Users { get; set; } = new List<User>();
+
+        public List<GameObject> Objects { get; set; } = new List<GameObject>();
+        public List<GameObject> removeObjects { get; set; } = new List<GameObject>();
+        private int generateId = 1;
+
         public abstract SpawnPos GetSpwanPos(int userId);
 
         public Room(MapData mapData)
@@ -86,7 +91,7 @@ namespace Server.Contents.Room
             S_PositionUpdate positionUpdatePacket = new S_PositionUpdate();
             positionUpdatePacket.PlayerPosUpdates.AddRange(Users.Select(user => new PlayerPosUpdate()
             {
-                UserId = user.UserId,
+                UserId = user.userId,
                 X = user.Position.X,
                 Y = user.Position.Y,
                 Vx = user.Velocity.X,
@@ -109,7 +114,10 @@ namespace Server.Contents.Room
             foreach(UserGameInfo info in userInfos)
             {
                 // TODO : (int) 캐스팅 하드코딩 수정
-                var user = new User((int)info.UserId, info.CharacterId, info.SkinId, roomId);
+                var user = new User((int)info.UserId, info.CharacterId, info.SkinId, this);
+                SpawnPos spawnPos = GetSpwanPos(user.userId);
+                user.Position = new Vector2(spawnPos.X, spawnPos.Y);
+
                 Users.Add(user);
             }
         }
@@ -123,7 +131,7 @@ namespace Server.Contents.Room
             lock (_lock)
             {
                 // 1. 사용자 조회
-                user = Users.Find(u => u.UserId == userId);
+                user = Users.Find(u => u.userId == userId);
                 if (user == null)
                 {
                     Console.WriteLine($"User not found! UserId: {userId}");
@@ -146,7 +154,7 @@ namespace Server.Contents.Room
                     result = EnterResult.AccessDenied;
                 }
                 // 3. 사용자 상태 검증
-                else if (user.State != PlayerState.None)
+                else if (user.state != PlayerState.None)
                 {
                     Console.WriteLine($"User already in game! UserId: {userId}");
                     result = EnterResult.AlreadyInRoom;
@@ -156,9 +164,9 @@ namespace Server.Contents.Room
                 {
                     // 사용자 정보 업데이트
                     user.nickname = nickname;
-                    user.Session = session;
+                    user.session = session;
                     session.User = user;
-                    user.State = PlayerState.Data;
+                    user.state = PlayerState.Data;
                 }
 
                 // 응답 생성 및 전송 
@@ -171,9 +179,10 @@ namespace Server.Contents.Room
                 // 플레이어 정보 추가
                 enterRoom.PlayerInfos.AddRange(Users.Select(u => new PlayerInfo()
                 {
-                    UserId = u.UserId,
-                    SkinId = u.SkinId,
-                    SpawnPos = GetSpwanPos(u.UserId),
+                    UserId = u.userId,
+                    SkinId = u.skinId,
+                    CharacterId = u.characterId,
+                    SpawnPos = GetSpwanPos(u.userId),
                 }));
 
                 Console.WriteLine(enterRoom);
@@ -181,7 +190,7 @@ namespace Server.Contents.Room
                 // 사용자 세션을 통해 응답 전송
                 if (result == EnterResult.Success)
                 {
-                    user.Session.Send(enterRoom); 
+                    user.session.Send(enterRoom); 
                 }
                 else
                 {
@@ -194,12 +203,12 @@ namespace Server.Contents.Room
         {
             lock (_lock)
             {
-                user.State = PlayerState.Ready;
+                user.state = PlayerState.Ready;
 
                 // 만약 모든 플레이어가 준비된 경우엔 게임 준비 완료상태임을 모든 플레이어에게 전달합니다.
-                if (Users.Find(u => u.State != PlayerState.Ready) == null)
+                if (Users.Find(u => u.state != PlayerState.Ready) == null)
                 {
-                    Users.ForEach(u => u.State = PlayerState.InGame);
+                    Users.ForEach(u => u.state = PlayerState.InGame);
 
                     S_ReadyCompleteGame readyComplete = new S_ReadyCompleteGame()
                     {
@@ -218,9 +227,9 @@ namespace Server.Contents.Room
             {
                 foreach (User user in Users)
                 {
-                    if (user.Session != null)
+                    if (user.session != null)
                     {
-                        user.Session.Send(message);
+                        user.session.Send(message);
                     }
                 }
             }
@@ -231,7 +240,7 @@ namespace Server.Contents.Room
             lock (_lock)
             {
                 // 사용자 조회
-                User? user = Users.Find(u => u.UserId == userId);
+                User? user = Users.Find(u => u.userId == userId);
                 if (user == null)
                 {
                     Console.WriteLine($"User not found! UserId: {userId}");
@@ -239,8 +248,8 @@ namespace Server.Contents.Room
                 }
 
                 // 사용자 상태 업데이트
-                user.State = PlayerState.Exit;
-                user.Session = null;
+                user.state = PlayerState.Exit;
+                user.session = null;
 
                 // 사용자 제거
                 Console.WriteLine($"User left the room! UserId: {userId}");
@@ -255,8 +264,8 @@ namespace Server.Contents.Room
                 // 방 종료시 모든 사용자 상태 업데이트
                 foreach (User user in Users)
                 {
-                    user.State = PlayerState.Exit;
-                    user.Session = null;
+                    user.state = PlayerState.Exit;
+                    user.session = null;
                 }
 
                 // 방 종료
@@ -275,10 +284,54 @@ namespace Server.Contents.Room
             lock (_lock)
             {
                 Vector2 newDir = new Vector2(dx, dy);
-                if (Users.Find(u => u.UserId == user.UserId) != null)
+                if (Users.Find(u => u.userId == user.userId) != null)
                 {
                     user.Velocity = newDir;
                 }
+            }
+        }
+
+        public void CreateProjectile(User user, float vx, float vy)
+        {
+            Console.WriteLine($"Create Projectile, vx : {vx}. vy : {vy}");
+
+            if(user == null)
+            {
+                return;
+            }
+
+            lock (_lock)
+            {
+                // 쿨타임이 체크 (너무 빨리 쏘려고 하는 경우를 방지)
+
+                // 투사체 생성
+                Vector2 velocity = new Vector2(vx, vy);
+                var projectile = new Projectile(
+                        user,
+                        this,
+                        generateId++,
+                        user.Position,
+                        velocity
+                );
+                Objects.Add(projectile);
+
+                S_Fire firePacket = new S_Fire
+                {
+                    X = projectile.Position.X,
+                    Y = projectile.Position.Y,
+                    Vx = projectile.Velocity.X,
+                    Vy = projectile.Velocity.Y,
+                    ProjectileInfo = new S_Fire.Types.ProjectileInfo
+                    {
+                        Damage = projectile.damage,
+                        Team = user.team.ToString(),
+                        Type = 1,
+                        UserId = projectile.user.userId,
+                        Speed = projectile.speed,
+                        ProjectileId = projectile.id
+                    }
+                };
+                Broadcast(firePacket);
             }
         }
     }

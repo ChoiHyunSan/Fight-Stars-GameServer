@@ -1,5 +1,4 @@
-﻿using Server.Web;
-using static Google.Protobuf.Protocol.S_EnterRoom.Types;
+﻿using Google.Protobuf.Protocol;
 
 namespace Server.Contents.Room
 {
@@ -11,17 +10,30 @@ namespace Server.Contents.Room
         {
             return new SpawnPos
             {
-                X = 0,
+                X = -4,
                 Y = 0,
             };
         }
 
         public override void Update(double deltaTime)
         {
-            // 방에 참여한 유저들에 대한 업데이트
-            foreach (User user in Users)
+            lock (_lock)
             {
-                user.Update(deltaTime);
+                // 방에 참여한 유저들에 대한 업데이트
+                foreach (User user in Users)
+                {
+                    user.Update(deltaTime);
+                }
+
+                foreach (GameObject gameobject in Objects)
+                {
+                    gameobject.Update(deltaTime);
+                }
+
+                foreach(GameObject gameobject in removeObjects)
+                {
+                    Objects.Remove(gameobject);
+                }
             }
         }
     }
