@@ -17,6 +17,7 @@ enum MsgId {
   S_DIE = 9;
   S_RESPAWN = 10;
   S_DESTROY_PROJECTILE = 11;
+  S_GAMEOVER = 12;
 }
 
 message C_EnterRoom {
@@ -129,3 +130,7 @@ message S_Respawn{
     SpawnPos spawnPos = 2;
 }
 
+message S_Gameover{
+    int32 redScore = 1; 
+    int32 blueScore = 2;
+}

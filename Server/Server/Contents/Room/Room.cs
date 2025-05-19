@@ -18,29 +18,41 @@ namespace Server.Contents.Room
 
     public abstract class Room : IJobQueue
     {
+        // 상수 정의
         private const int TickRate = 30;                        // 초당 30 틱
         private const double TickInterval = 1000.0 / TickRate;  // 밀리초 단위 (33.33ms)
         private const int SyncIntervalTick = 5;                 // 틱 간격 (2틱마다 동기화)
+        private const float RespawnDelay = 5.0f;
 
+        // 방 정보
         public string RoomId { get; set; }
         public string Password { get; set; }
-
         public MapData Map;
-
         public RoomState State { get; set; } = RoomState.Waiting;
 
-        public object _lock = new object(); // Lock 객체
-
-        private Task Task; // Task 객체
-
-        // 방에 참여한 유저 정보 
+        // 유저 정보 
         public List<User> Users { get; set; } = new List<User>();
 
+        // 오브젝트 정보
         public List<GameObject> Objects { get; set; } = new List<GameObject>();
         public List<GameObject> removeObjects { get; set; } = new List<GameObject>();
         private int generateId = 1;
 
+        // 인게임 정보
+        public Score score = new Score();
+        private Dictionary<User, float> _respawnTimers = new();
+
+        // 동기화 객체
+        public object _lock = new object(); // Lock 객체
+        private Task Task; // Task 객체
+
         public abstract SpawnPos GetSpwanPos(int userId);
+
+        public class Score
+        {
+            public int red = 0;
+            public int blue = 0;
+        }
 
         public Room(MapData mapData)
         {
@@ -100,7 +112,48 @@ namespace Server.Contents.Room
             Broadcast(positionUpdatePacket);
         }
 
-        public abstract void Update(double deltaTime);
+        public abstract void UpdateGamemode(double deltaTime);
+
+        public virtual void Update(double deltaTime)
+        {
+            lock (_lock)
+            {
+                // 방에 참여한 유저들에 대한 업데이트
+                foreach (User user in Users)
+                {
+                    user.Update(deltaTime);
+                }
+                foreach (GameObject gameobject in Objects)
+                {
+                    gameobject.Update(deltaTime);
+                }
+                foreach (GameObject gameobject in removeObjects)
+                {
+                    Objects.Remove(gameobject);
+                }
+
+                HandleRespawnTimers(deltaTime);
+                UpdateGamemode(deltaTime);
+            }
+        }
+
+        private void HandleRespawnTimers(double deltaTime)
+        {
+            // 리스폰 타이머 처리
+            var respawnList = new List<User>();
+            foreach (var pair in _respawnTimers)
+            {
+                _respawnTimers[pair.Key] -= (float)deltaTime;
+                if (_respawnTimers[pair.Key] <= 0)
+                    respawnList.Add(pair.Key);
+            }
+
+            foreach (var user in respawnList)
+            {
+                Respawn(user);
+                _respawnTimers.Remove(user);
+            }
+        }
 
         public void Push(Action job)
         {
@@ -116,10 +169,16 @@ namespace Server.Contents.Room
                 // TODO : (int) 캐스팅 하드코딩 수정
                 var user = new User((int)info.UserId, info.CharacterId, info.SkinId, this);
                 SpawnPos spawnPos = GetSpwanPos(user.userId);
+                SetTeam(user);
                 user.Position = new Vector2(spawnPos.X, spawnPos.Y);
 
                 Users.Add(user);
             }
+        }
+
+        private void SetTeam(User user)
+        {
+            user.team = user.userId % 2 == 0 ? Team.Red : Team.Blue;
         }
 
         public void EnterUser(int userId, string password, string nickname, ClientSession session)
@@ -182,6 +241,7 @@ namespace Server.Contents.Room
                     UserId = u.userId,
                     SkinId = u.skinId,
                     CharacterId = u.characterId,
+                    Nickname = u.nickname,
                     SpawnPos = GetSpwanPos(u.userId),
                 }));
 
@@ -257,21 +317,24 @@ namespace Server.Contents.Room
                 return Users.Count;
             }
         }
+
         public void Release()
         {
-            lock (_lock)
+            if(State != RoomState.InGame)
             {
-                // 방 종료시 모든 사용자 상태 업데이트
-                foreach (User user in Users)
-                {
-                    user.state = PlayerState.Exit;
-                    user.session = null;
-                }
-
-                // 방 종료
-                State = RoomState.End;
-                Console.WriteLine($"Room Release, Room ID : {RoomId}");
+                return;
             }
+
+            // 방 종료시 모든 사용자 상태 업데이트
+            foreach (User user in Users)
+            {
+                user.state = PlayerState.Exit;
+                user.session = null;
+            }
+
+            // 방 종료
+            State = RoomState.End;
+            Console.WriteLine($"Room Release, Room ID : {RoomId}");   
         }
 
         public void UpdatePlayerDir(User user, float dx, float dy)
@@ -310,7 +373,7 @@ namespace Server.Contents.Room
                         user,
                         this,
                         generateId++,
-                        user.Position,
+                        user.Position + new Vector2(0,1),
                         velocity
                 );
                 Objects.Add(projectile);
@@ -333,6 +396,58 @@ namespace Server.Contents.Room
                 };
                 Broadcast(firePacket);
             }
+        }
+
+        public void AddScore(Team team)
+        {
+            if(team == Team.Red)
+            {
+                score.red++;
+            }
+            else
+            {
+                score.blue++;
+            }
+        }
+
+        public void OnUserDeath(User dieUser, User killUser)
+        {
+            dieUser.isDead = true; 
+            _respawnTimers[dieUser] = RespawnDelay;
+
+            AddScore(killUser.team);
+
+            S_Die diePacket = new S_Die
+            {
+                DieUserId = dieUser.userId,
+                KillUserId = killUser.userId,
+                Score = new S_Die.Types.KillScore
+                {
+                    Red = score.red,
+                    Blue = score.blue
+                }
+            };
+            Broadcast(diePacket);
+        }
+
+        private void Respawn(User user)
+        {
+            user.isDead = false;
+            user.hp = user.maxHp;
+            SpawnPos pos = GetSpwanPos(user.userId);
+            user.Position = new Vector2(pos.X, pos.Y);
+            user.Velocity = Vector2.Zero;
+
+            S_Respawn respawnPacket = new S_Respawn
+            {
+                SpawnPos = new SpawnPos
+                {
+                    X = pos.X,
+                    Y = pos.Y
+                },
+                UserId = user.userId,
+            };
+            Broadcast(respawnPacket);
         }
     }
 }

@@ -59,13 +59,15 @@ namespace Google.Protobuf.Protocol
                   "b2wuU19EaWUuS2lsbFNjb3JlGiYKCUtpbGxTY29yZRILCgNyZWQYASABKAUS",
                   "DAoEYmx1ZRgCIAEoBSIrChNTX0Rlc3Ryb3lQcm9qZWN0aWxlEhQKDHByb2pl",
                   "Y3RpbGVJZBgBIAEoBSJBCglTX1Jlc3Bhd24SDgoGdXNlcklkGAEgASgFEiQK",
-                  "CHNwYXduUG9zGAIgASgLMhIuUHJvdG9jb2wuU3Bhd25Qb3Mq3gEKBU1zZ0lk",
-                  "EhAKDENfRU5URVJfUk9PTRAAEhAKDFNfRU5URVJfUk9PTRABEhkKFUNfUkVB",
-                  "RFlfQ09NUExFVEVfR0FNRRACEhkKFVNfUkVBRFlfQ09NUExFVEVfR0FNRRAD",
-                  "EgoKBkNfTU9WRRAEEhUKEVNfUE9TSVRJT05fVVBEQVRFEAUSCgoGQ19GSVJF",
-                  "EAYSCgoGU19GSVJFEAcSDAoIU19BVFRBQ0sQCBIJCgVTX0RJRRAJEg0KCVNf",
-                  "UkVTUEFXThAKEhgKFFNfREVTVFJPWV9QUk9KRUNUSUxFEAtCG6oCGEdvb2ds",
-                  "ZS5Qcm90b2J1Zi5Qcm90b2NvbGIGcHJvdG8z"));
+                  "CHNwYXduUG9zGAIgASgLMhIuUHJvdG9jb2wuU3Bhd25Qb3MiMQoKU19HYW1l",
+                  "b3ZlchIQCghyZWRTY29yZRgBIAEoBRIRCglibHVlU2NvcmUYAiABKAUq7gEK",
+                  "BU1zZ0lkEhAKDENfRU5URVJfUk9PTRAAEhAKDFNfRU5URVJfUk9PTRABEhkK",
+                  "FUNfUkVBRFlfQ09NUExFVEVfR0FNRRACEhkKFVNfUkVBRFlfQ09NUExFVEVf",
+                  "R0FNRRADEgoKBkNfTU9WRRAEEhUKEVNfUE9TSVRJT05fVVBEQVRFEAUSCgoG",
+                  "Q19GSVJFEAYSCgoGU19GSVJFEAcSDAoIU19BVFRBQ0sQCBIJCgVTX0RJRRAJ",
+                  "Eg0KCVNfUkVTUEFXThAKEhgKFFNfREVTVFJPWV9QUk9KRUNUSUxFEAsSDgoK",
+                  "U19HQU1FT1ZFUhAMQhuqAhhHb29nbGUuUHJvdG9idWYuUHJvdG9jb2xiBnBy",
+                  "b3RvMw=="));
             descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
                 new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
                 new pbr::GeneratedClrTypeInfo(new[] { typeof(global::Google.Protobuf.Protocol.MsgId), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -81,7 +83,8 @@ namespace Google.Protobuf.Protocol
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Attack), global::Google.Protobuf.Protocol.S_Attack.Parser, new[]{ "UserId", "Hp", "ProjectileId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Die), global::Google.Protobuf.Protocol.S_Die.Parser, new[]{ "DieUserId", "KillUserId", "Score" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Die.Types.KillScore), global::Google.Protobuf.Protocol.S_Die.Types.KillScore.Parser, new[]{ "Red", "Blue" }, null, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_DestroyProjectile), global::Google.Protobuf.Protocol.S_DestroyProjectile.Parser, new[]{ "ProjectileId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Respawn), global::Google.Protobuf.Protocol.S_Respawn.Parser, new[]{ "UserId", "SpawnPos" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Respawn), global::Google.Protobuf.Protocol.S_Respawn.Parser, new[]{ "UserId", "SpawnPos" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Gameover), global::Google.Protobuf.Protocol.S_Gameover.Parser, new[]{ "RedScore", "BlueScore" }, null, null, null, null)
                 }));
         }
         #endregion
@@ -102,6 +105,7 @@ namespace Google.Protobuf.Protocol
         [pbr::OriginalName("S_DIE")] SDie = 9,
         [pbr::OriginalName("S_RESPAWN")] SRespawn = 10,
         [pbr::OriginalName("S_DESTROY_PROJECTILE")] SDestroyProjectile = 11,
+        [pbr::OriginalName("S_GAMEOVER")] SGameover = 12,
     }
 
     #endregion
@@ -3912,6 +3916,197 @@ namespace Google.Protobuf.Protocol
                                 SpawnPos = new global::Google.Protobuf.Protocol.SpawnPos();
                             }
                             input.ReadMessage(SpawnPos);
+                            break;
+                        }
+                }
+            }
+        }
+
+    }
+
+    public sealed partial class S_Gameover : pb::IMessage<S_Gameover>
+    {
+        private static readonly pb::MessageParser<S_Gameover> _parser = new pb::MessageParser<S_Gameover>(() => new S_Gameover());
+        private pb::UnknownFieldSet _unknownFields;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<S_Gameover> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor
+        {
+            get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[13]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor
+        {
+            get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public S_Gameover()
+        {
+            OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public S_Gameover(S_Gameover other) : this()
+        {
+            redScore_ = other.redScore_;
+            blueScore_ = other.blueScore_;
+            _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public S_Gameover Clone()
+        {
+            return new S_Gameover(this);
+        }
+
+        /// <summary>Field number for the "redScore" field.</summary>
+        public const int RedScoreFieldNumber = 1;
+        private int redScore_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int RedScore
+        {
+            get { return redScore_; }
+            set
+            {
+                redScore_ = value;
+            }
+        }
+
+        /// <summary>Field number for the "blueScore" field.</summary>
+        public const int BlueScoreFieldNumber = 2;
+        private int blueScore_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int BlueScore
+        {
+            get { return blueScore_; }
+            set
+            {
+                blueScore_ = value;
+            }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other)
+        {
+            return Equals(other as S_Gameover);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(S_Gameover other)
+        {
+            if (ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (ReferenceEquals(other, this))
+            {
+                return true;
+            }
+            if (RedScore != other.RedScore) return false;
+            if (BlueScore != other.BlueScore) return false;
+            return Equals(_unknownFields, other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode()
+        {
+            int hash = 1;
+            if (RedScore != 0) hash ^= RedScore.GetHashCode();
+            if (BlueScore != 0) hash ^= BlueScore.GetHashCode();
+            if (_unknownFields != null)
+            {
+                hash ^= _unknownFields.GetHashCode();
+            }
+            return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString()
+        {
+            return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output)
+        {
+            if (RedScore != 0)
+            {
+                output.WriteRawTag(8);
+                output.WriteInt32(RedScore);
+            }
+            if (BlueScore != 0)
+            {
+                output.WriteRawTag(16);
+                output.WriteInt32(BlueScore);
+            }
+            if (_unknownFields != null)
+            {
+                _unknownFields.WriteTo(output);
+            }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize()
+        {
+            int size = 0;
+            if (RedScore != 0)
+            {
+                size += 1 + pb::CodedOutputStream.ComputeInt32Size(RedScore);
+            }
+            if (BlueScore != 0)
+            {
+                size += 1 + pb::CodedOutputStream.ComputeInt32Size(BlueScore);
+            }
+            if (_unknownFields != null)
+            {
+                size += _unknownFields.CalculateSize();
+            }
+            return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(S_Gameover other)
+        {
+            if (other == null)
+            {
+                return;
+            }
+            if (other.RedScore != 0)
+            {
+                RedScore = other.RedScore;
+            }
+            if (other.BlueScore != 0)
+            {
+                BlueScore = other.BlueScore;
+            }
+            _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input)
+        {
+            uint tag;
+            while ((tag = input.ReadTag()) != 0)
+            {
+                switch (tag)
+                {
+                    default:
+                        _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+                        break;
+                    case 8:
+                        {
+                            RedScore = input.ReadInt32();
+                            break;
+                        }
+                    case 16:
+                        {
+                            BlueScore = input.ReadInt32();
                             break;
                         }
                 }

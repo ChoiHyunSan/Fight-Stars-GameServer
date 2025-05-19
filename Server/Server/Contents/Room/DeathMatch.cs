@@ -4,37 +4,60 @@ namespace Server.Contents.Room
 {
     public class DeathMatch : Room
     {
-        public DeathMatch(MapData mapData) : base(mapData){}
+        private float _remainingGameTime = 10f;
+
+        public DeathMatch(MapData mapData) : base(mapData) { }
 
         public override SpawnPos GetSpwanPos(int userId)
         {
-            return new SpawnPos
-            {
-                X = -4,
-                Y = 0,
-            };
+            return userId % 2 == 0 ? new SpawnPos { X = -4, Y = 0 } : new SpawnPos { X = -8, Y = 0 };
         }
 
-        public override void Update(double deltaTime)
+        public override void UpdateGamemode(double deltaTime)
         {
-            lock (_lock)
+            // 제한 시간 감소 처리
+            _remainingGameTime -= (float)deltaTime;
+            if (_remainingGameTime <= 0)
             {
-                // 방에 참여한 유저들에 대한 업데이트
-                foreach (User user in Users)
-                {
-                    user.Update(deltaTime);
-                }
-
-                foreach (GameObject gameobject in Objects)
-                {
-                    gameobject.Update(deltaTime);
-                }
-
-                foreach(GameObject gameobject in removeObjects)
-                {
-                    Objects.Remove(gameobject);
-                }
+                EndGame();
             }
+        }
+
+        private void EndGame()
+        {
+            Console.WriteLine("[DeathMatch] Game End");
+
+            // API 서버에 게임 결과 전송
+            CreateGameResultResponse response = GameResultAPIHelper
+                .CreateGameResult(new CreateGameResultRequest
+                {
+                    PlayerGameResults = Users.Select(player => new PlayerGameResult
+                    {
+                        PlayerId = player.userId,
+                        IsWin = player.team == Team.Blue
+                            ? score.blue > score.red
+                            : score.red > score.blue,
+                        Exp = 100,
+                        Gold = 100
+                    }).ToList()
+                }).GetAwaiter().GetResult();
+            Console.WriteLine($"CreateGameResultResponse :  {response.ToString()}");
+
+            if(response != null)
+            {
+                // TODO: S_GameOver 패킷 정의 필요
+                S_Gameover gameOverPacket = new S_Gameover
+                {
+                    BlueScore = score.blue,
+                    RedScore = score.red
+                };
+                Broadcast(gameOverPacket);
+            }
+            else
+            {
+                Console.WriteLine("[DeathMatch] Failed to send game result to API server.");
+            }
+            Release();
         }
     }
 }

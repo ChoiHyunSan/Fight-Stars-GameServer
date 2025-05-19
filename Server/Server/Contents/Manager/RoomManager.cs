@@ -76,7 +76,7 @@ namespace Server.Contents.Room
                 if (Rooms.ContainsKey(roomId))
                 {
                     Room room = Rooms[roomId];
-                    room.Release();
+                    //room.Release();
 
                     Rooms.Remove(roomId);
                     Console.WriteLine($"Room Removed! Room Id : {roomId}");

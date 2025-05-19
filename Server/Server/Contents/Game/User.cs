@@ -1,4 +1,5 @@
-﻿using Server;
+﻿using Google.Protobuf.Protocol;
+using Server;
 using Server.Contents.Room;
 using System.Numerics;
 
@@ -24,13 +25,16 @@ public class User : GameObject
     public int userId { get; set; }
     public int characterId { get; set; }
     public int skinId { get; set; }
-
     public string nickname { get; set; } = string.Empty;
     public PlayerState state { get; set; } = PlayerState.None;
     public ClientSession session { get; set; } = null;
     public Room room { get; set; }
-
     public Team team { get; set; }
+
+    // 인게임 데이터
+    public int hp;
+    internal int maxHp;
+    public bool isDead { get; internal set; }
 
     public User(int userId, int characterId, int skinId, Room room)
     {
@@ -38,6 +42,12 @@ public class User : GameObject
         this.characterId = characterId;
         this.skinId = skinId;
         this.room = room;
+        this.ColliderRadius = 1f;
+
+        // TODO : 인게임 데이터를 characterId에 따라 세팅하도록 변경
+        this.hp = 100;
+        this.maxHp = 100; 
+        this.isDead = false;
     }
 
     public override void Update(double deltaTime)
@@ -68,5 +78,35 @@ public class User : GameObject
         Position = tentativePos;
 
         Console.WriteLine($"Player {nickname}`s current Position is {Position}");
+    }
+
+    public void OnDamaged(int projectileId, int damage, User killUser)
+    {
+        Room room = this.room;
+        if (room == null)
+        {
+            return;
+        }
+
+        // 데미지를 가하여 HP 갱신
+        hp -= damage;
+        if(hp <= 0)
+        {
+            hp = 0;
+
+            // 유저 사망처리 메서드를 호출
+            room.OnUserDeath(this, killUser);
+        }
+        else
+        {
+            // 죽지 않았으므로 Attack 패킷을 전달 
+            S_Attack attackPakcet = new S_Attack
+            {
+                ProjectileId = projectileId,
+                Hp = hp,
+                UserId = this.userId
+            };
+            room.Broadcast(attackPakcet);
+        }
     }
 }

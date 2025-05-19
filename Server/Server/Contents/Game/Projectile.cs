@@ -22,12 +22,13 @@ public class Projectile : GameObject
 
         // TODO : 하드코딩된 수치적 요소는 추후에 변경
         damage = 10;
-        size = 1;
-        speed = 10;
+        size = 0.2f;
+        speed = 20;
         range = 10;
 
         this.user = user;
         this.room = room;
+        this.ColliderRadius = size;
     }
 
     public User user { get; set; }
@@ -71,15 +72,35 @@ public class Projectile : GameObject
     private void CheckPlayerHit()
     {
         List<User> users = room.Users;
-        foreach(var user in users)
+        foreach(var target in users)
         {
-            if(user == this.user || user.team == this.user.team)
+            if(target == this.user || target.team == this.user.team)
             {
                 continue;
             }
 
-            // 피격시킨 경우 Attack 패킷 전달
-            
+            // 거리 계산
+            float dist = Vector2.Distance(Position, target.Position);
+            float collisionDist = this.ColliderRadius + target.ColliderRadius;
+
+            if (dist <= collisionDist)
+            {
+                // 데미지 전달
+                target.OnDamaged(id, damage, this.user);
+
+                // 투사체 제거
+                S_DestroyProjectile destroyPacket = new S_DestroyProjectile
+                {
+                    ProjectileId = id
+                };
+                room.removeObjects.Add(this);
+                room.Broadcast(destroyPacket);
+
+                Console.WriteLine($"Projectile {id} hit user at {target.Position}");
+
+                // 중복 충돌 방지
+                break;
+            }
         }
     }
 
