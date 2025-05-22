@@ -1,4 +1,5 @@
 ﻿using Google.Protobuf.Protocol;
+using static Google.Protobuf.Protocol.S_Gameover.Types;
 
 namespace Server.Contents.Room
 {
@@ -45,13 +46,36 @@ namespace Server.Contents.Room
 
             if(response != null)
             {
-                // TODO: S_GameOver 패킷 정의 필요
-                S_Gameover gameOverPacket = new S_Gameover
+                List<UserGameResultData> userGameResults = response.userGameResults;
+                foreach (var userGameResult in userGameResults)
                 {
-                    BlueScore = score.blue,
-                    RedScore = score.red
-                };
-                Broadcast(gameOverPacket);
+                    // 게임 결과를 클라이언트에 전송
+                    S_Gameover gameOverPacket = new S_Gameover
+                    {
+                        BlueScore = score.blue,
+                        RedScore = score.red,
+
+                        // 클라이언트 상의 데이터를 갱신시키기 위해서 Result Data를 같이 보낸다.
+                        ResultData = new ResultData
+                        {
+                            Energy = userGameResult.energy,
+                            Exp = userGameResult.exp,
+                            Gold = userGameResult.gold,
+                            Level = userGameResult.level,
+                            LoseCount = userGameResult.loseCount,
+                            TotalPlayCount = userGameResult.totalPlayCount,
+                            WinCount = userGameResult.winCount,
+                        }
+                    };
+
+                    User? player = Users.Find(x => x.userId == userGameResult.userId);
+                    if (player == null)
+                    {
+                        Console.WriteLine($"Player Is not Found, Player`s UserId : {userGameResult.userId}");
+                        continue;
+                    }
+                    player.session.Send(gameOverPacket);
+                }
             }
             else
             {

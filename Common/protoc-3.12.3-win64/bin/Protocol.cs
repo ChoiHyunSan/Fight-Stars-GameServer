@@ -55,15 +55,19 @@ namespace Google.Protobuf.Protocol {
             "b2wuU19EaWUuS2lsbFNjb3JlGiYKCUtpbGxTY29yZRILCgNyZWQYASABKAUS",
             "DAoEYmx1ZRgCIAEoBSIrChNTX0Rlc3Ryb3lQcm9qZWN0aWxlEhQKDHByb2pl",
             "Y3RpbGVJZBgBIAEoBSJBCglTX1Jlc3Bhd24SDgoGdXNlcklkGAEgASgFEiQK",
-            "CHNwYXduUG9zGAIgASgLMhIuUHJvdG9jb2wuU3Bhd25Qb3MiMQoKU19HYW1l",
-            "b3ZlchIQCghyZWRTY29yZRgBIAEoBRIRCglibHVlU2NvcmUYAiABKAUq7gEK",
-            "BU1zZ0lkEhAKDENfRU5URVJfUk9PTRAAEhAKDFNfRU5URVJfUk9PTRABEhkK",
-            "FUNfUkVBRFlfQ09NUExFVEVfR0FNRRACEhkKFVNfUkVBRFlfQ09NUExFVEVf",
-            "R0FNRRADEgoKBkNfTU9WRRAEEhUKEVNfUE9TSVRJT05fVVBEQVRFEAUSCgoG",
-            "Q19GSVJFEAYSCgoGU19GSVJFEAcSDAoIU19BVFRBQ0sQCBIJCgVTX0RJRRAJ",
-            "Eg0KCVNfUkVTUEFXThAKEhgKFFNfREVTVFJPWV9QUk9KRUNUSUxFEAsSDgoK",
-            "U19HQU1FT1ZFUhAMQhuqAhhHb29nbGUuUHJvdG9idWYuUHJvdG9jb2xiBnBy",
-            "b3RvMw=="));
+            "CHNwYXduUG9zGAIgASgLMhIuUHJvdG9jb2wuU3Bhd25Qb3Mi7AEKClNfR2Ft",
+            "ZW92ZXISEAoIcmVkU2NvcmUYASABKAUSEQoJYmx1ZVNjb3JlGAIgASgFEjMK",
+            "CnJlc3VsdERhdGEYAyABKAsyHy5Qcm90b2NvbC5TX0dhbWVvdmVyLlJlc3Vs",
+            "dERhdGEagwEKClJlc3VsdERhdGESEAoId2luQ291bnQYASABKAUSEQoJbG9z",
+            "ZUNvdW50GAIgASgFEhYKDnRvdGFsUGxheUNvdW50GAMgASgFEgwKBGdvbGQY",
+            "BCABKAUSDgoGZW5lcmd5GAUgASgFEgsKA2V4cBgGIAEoBRINCgVsZXZlbBgH",
+            "IAEoBSruAQoFTXNnSWQSEAoMQ19FTlRFUl9ST09NEAASEAoMU19FTlRFUl9S",
+            "T09NEAESGQoVQ19SRUFEWV9DT01QTEVURV9HQU1FEAISGQoVU19SRUFEWV9D",
+            "T01QTEVURV9HQU1FEAMSCgoGQ19NT1ZFEAQSFQoRU19QT1NJVElPTl9VUERB",
+            "VEUQBRIKCgZDX0ZJUkUQBhIKCgZTX0ZJUkUQBxIMCghTX0FUVEFDSxAIEgkK",
+            "BVNfRElFEAkSDQoJU19SRVNQQVdOEAoSGAoUU19ERVNUUk9ZX1BST0pFQ1RJ",
+            "TEUQCxIOCgpTX0dBTUVPVkVSEAxCG6oCGEdvb2dsZS5Qcm90b2J1Zi5Qcm90",
+            "b2NvbGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -80,7 +84,7 @@ namespace Google.Protobuf.Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Die), global::Google.Protobuf.Protocol.S_Die.Parser, new[]{ "DieUserId", "KillUserId", "Score" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Die.Types.KillScore), global::Google.Protobuf.Protocol.S_Die.Types.KillScore.Parser, new[]{ "Red", "Blue" }, null, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_DestroyProjectile), global::Google.Protobuf.Protocol.S_DestroyProjectile.Parser, new[]{ "ProjectileId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Respawn), global::Google.Protobuf.Protocol.S_Respawn.Parser, new[]{ "UserId", "SpawnPos" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Gameover), global::Google.Protobuf.Protocol.S_Gameover.Parser, new[]{ "RedScore", "BlueScore" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Gameover), global::Google.Protobuf.Protocol.S_Gameover.Parser, new[]{ "RedScore", "BlueScore", "ResultData" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Gameover.Types.ResultData), global::Google.Protobuf.Protocol.S_Gameover.Types.ResultData.Parser, new[]{ "WinCount", "LoseCount", "TotalPlayCount", "Gold", "Energy", "Exp", "Level" }, null, null, null, null)})
           }));
     }
     #endregion
@@ -3271,6 +3275,7 @@ namespace Google.Protobuf.Protocol {
     public S_Gameover(S_Gameover other) : this() {
       redScore_ = other.redScore_;
       blueScore_ = other.blueScore_;
+      resultData_ = other.resultData_ != null ? other.resultData_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3301,6 +3306,17 @@ namespace Google.Protobuf.Protocol {
       }
     }
 
+    /// <summary>Field number for the "resultData" field.</summary>
+    public const int ResultDataFieldNumber = 3;
+    private global::Google.Protobuf.Protocol.S_Gameover.Types.ResultData resultData_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Google.Protobuf.Protocol.S_Gameover.Types.ResultData ResultData {
+      get { return resultData_; }
+      set {
+        resultData_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as S_Gameover);
@@ -3316,6 +3332,7 @@ namespace Google.Protobuf.Protocol {
       }
       if (RedScore != other.RedScore) return false;
       if (BlueScore != other.BlueScore) return false;
+      if (!object.Equals(ResultData, other.ResultData)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3324,6 +3341,7 @@ namespace Google.Protobuf.Protocol {
       int hash = 1;
       if (RedScore != 0) hash ^= RedScore.GetHashCode();
       if (BlueScore != 0) hash ^= BlueScore.GetHashCode();
+      if (resultData_ != null) hash ^= ResultData.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3345,6 +3363,10 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(16);
         output.WriteInt32(BlueScore);
       }
+      if (resultData_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(ResultData);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3358,6 +3380,9 @@ namespace Google.Protobuf.Protocol {
       }
       if (BlueScore != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(BlueScore);
+      }
+      if (resultData_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ResultData);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3375,6 +3400,12 @@ namespace Google.Protobuf.Protocol {
       }
       if (other.BlueScore != 0) {
         BlueScore = other.BlueScore;
+      }
+      if (other.resultData_ != null) {
+        if (resultData_ == null) {
+          ResultData = new global::Google.Protobuf.Protocol.S_Gameover.Types.ResultData();
+        }
+        ResultData.MergeFrom(other.ResultData);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3395,9 +3426,320 @@ namespace Google.Protobuf.Protocol {
             BlueScore = input.ReadInt32();
             break;
           }
+          case 26: {
+            if (resultData_ == null) {
+              ResultData = new global::Google.Protobuf.Protocol.S_Gameover.Types.ResultData();
+            }
+            input.ReadMessage(ResultData);
+            break;
+          }
         }
       }
     }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the S_Gameover message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public sealed partial class ResultData : pb::IMessage<ResultData> {
+        private static readonly pb::MessageParser<ResultData> _parser = new pb::MessageParser<ResultData>(() => new ResultData());
+        private pb::UnknownFieldSet _unknownFields;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<ResultData> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Google.Protobuf.Protocol.S_Gameover.Descriptor.NestedTypes[0]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public ResultData() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public ResultData(ResultData other) : this() {
+          winCount_ = other.winCount_;
+          loseCount_ = other.loseCount_;
+          totalPlayCount_ = other.totalPlayCount_;
+          gold_ = other.gold_;
+          energy_ = other.energy_;
+          exp_ = other.exp_;
+          level_ = other.level_;
+          _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public ResultData Clone() {
+          return new ResultData(this);
+        }
+
+        /// <summary>Field number for the "winCount" field.</summary>
+        public const int WinCountFieldNumber = 1;
+        private int winCount_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int WinCount {
+          get { return winCount_; }
+          set {
+            winCount_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "loseCount" field.</summary>
+        public const int LoseCountFieldNumber = 2;
+        private int loseCount_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int LoseCount {
+          get { return loseCount_; }
+          set {
+            loseCount_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "totalPlayCount" field.</summary>
+        public const int TotalPlayCountFieldNumber = 3;
+        private int totalPlayCount_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int TotalPlayCount {
+          get { return totalPlayCount_; }
+          set {
+            totalPlayCount_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "gold" field.</summary>
+        public const int GoldFieldNumber = 4;
+        private int gold_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int Gold {
+          get { return gold_; }
+          set {
+            gold_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "energy" field.</summary>
+        public const int EnergyFieldNumber = 5;
+        private int energy_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int Energy {
+          get { return energy_; }
+          set {
+            energy_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "exp" field.</summary>
+        public const int ExpFieldNumber = 6;
+        private int exp_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int Exp {
+          get { return exp_; }
+          set {
+            exp_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "level" field.</summary>
+        public const int LevelFieldNumber = 7;
+        private int level_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int Level {
+          get { return level_; }
+          set {
+            level_ = value;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as ResultData);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(ResultData other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (WinCount != other.WinCount) return false;
+          if (LoseCount != other.LoseCount) return false;
+          if (TotalPlayCount != other.TotalPlayCount) return false;
+          if (Gold != other.Gold) return false;
+          if (Energy != other.Energy) return false;
+          if (Exp != other.Exp) return false;
+          if (Level != other.Level) return false;
+          return Equals(_unknownFields, other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (WinCount != 0) hash ^= WinCount.GetHashCode();
+          if (LoseCount != 0) hash ^= LoseCount.GetHashCode();
+          if (TotalPlayCount != 0) hash ^= TotalPlayCount.GetHashCode();
+          if (Gold != 0) hash ^= Gold.GetHashCode();
+          if (Energy != 0) hash ^= Energy.GetHashCode();
+          if (Exp != 0) hash ^= Exp.GetHashCode();
+          if (Level != 0) hash ^= Level.GetHashCode();
+          if (_unknownFields != null) {
+            hash ^= _unknownFields.GetHashCode();
+          }
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (WinCount != 0) {
+            output.WriteRawTag(8);
+            output.WriteInt32(WinCount);
+          }
+          if (LoseCount != 0) {
+            output.WriteRawTag(16);
+            output.WriteInt32(LoseCount);
+          }
+          if (TotalPlayCount != 0) {
+            output.WriteRawTag(24);
+            output.WriteInt32(TotalPlayCount);
+          }
+          if (Gold != 0) {
+            output.WriteRawTag(32);
+            output.WriteInt32(Gold);
+          }
+          if (Energy != 0) {
+            output.WriteRawTag(40);
+            output.WriteInt32(Energy);
+          }
+          if (Exp != 0) {
+            output.WriteRawTag(48);
+            output.WriteInt32(Exp);
+          }
+          if (Level != 0) {
+            output.WriteRawTag(56);
+            output.WriteInt32(Level);
+          }
+          if (_unknownFields != null) {
+            _unknownFields.WriteTo(output);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (WinCount != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeInt32Size(WinCount);
+          }
+          if (LoseCount != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeInt32Size(LoseCount);
+          }
+          if (TotalPlayCount != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeInt32Size(TotalPlayCount);
+          }
+          if (Gold != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeInt32Size(Gold);
+          }
+          if (Energy != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeInt32Size(Energy);
+          }
+          if (Exp != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeInt32Size(Exp);
+          }
+          if (Level != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeInt32Size(Level);
+          }
+          if (_unknownFields != null) {
+            size += _unknownFields.CalculateSize();
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(ResultData other) {
+          if (other == null) {
+            return;
+          }
+          if (other.WinCount != 0) {
+            WinCount = other.WinCount;
+          }
+          if (other.LoseCount != 0) {
+            LoseCount = other.LoseCount;
+          }
+          if (other.TotalPlayCount != 0) {
+            TotalPlayCount = other.TotalPlayCount;
+          }
+          if (other.Gold != 0) {
+            Gold = other.Gold;
+          }
+          if (other.Energy != 0) {
+            Energy = other.Energy;
+          }
+          if (other.Exp != 0) {
+            Exp = other.Exp;
+          }
+          if (other.Level != 0) {
+            Level = other.Level;
+          }
+          _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+                break;
+              case 8: {
+                WinCount = input.ReadInt32();
+                break;
+              }
+              case 16: {
+                LoseCount = input.ReadInt32();
+                break;
+              }
+              case 24: {
+                TotalPlayCount = input.ReadInt32();
+                break;
+              }
+              case 32: {
+                Gold = input.ReadInt32();
+                break;
+              }
+              case 40: {
+                Energy = input.ReadInt32();
+                break;
+              }
+              case 48: {
+                Exp = input.ReadInt32();
+                break;
+              }
+              case 56: {
+                Level = input.ReadInt32();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+    }
+    #endregion
 
   }
 

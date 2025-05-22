@@ -133,4 +133,15 @@ message S_Respawn{
 message S_Gameover{
     int32 redScore = 1; 
     int32 blueScore = 2;
+    ResultData  resultData = 3;
+
+    message ResultData{
+        int32 winCount = 1;
+        int32 loseCount = 2;
+        int32 totalPlayCount = 3;
+        int32 gold = 4;
+        int32 energy = 5;
+        int32 exp = 6;
+        int32 level = 7;
+    }
 }

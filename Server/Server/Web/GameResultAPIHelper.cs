@@ -45,16 +45,17 @@ public class PlayerGameResult
 
 public class CreateGameResultResponse
 {
-    public List<UserGameResultData> UserGameResults { get; set; } = new();
+    public List<UserGameResultData> userGameResults { get; set; } = new();
 }
+
 public class UserGameResultData
 {
-    public long UserId { get; set; }
-    public int WinCount { get; set; } = 0;
-    public int LoseCount { get; set; } = 0;
-    public int TotalPlayCount { get; set; } = 0;
-    public int Gold { get; set; } = 0;
-    public int Energy { get; set; } = 0;
-    public int Exp { get; set; } = 0;
-    public int Level { get; set; } = 1;
+    public long userId { get; set; }
+    public int winCount { get; set; } = 0;
+    public int loseCount { get; set; } = 0;
+    public int totalPlayCount { get; set; } = 0;
+    public int gold { get; set; } = 0;
+    public int energy { get; set; } = 0;
+    public int exp { get; set; } = 0;
+    public int level { get; set; } = 1;
 }
